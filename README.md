@@ -32,6 +32,16 @@ I learned how to:
 
 Link to demo on Unity Play: https://play.unity.com/mg/other/lava-challenge-16
 
+#### Essentials of Programming in Unity
+This learning project will give you a sample of the essential tasks of a Unity programmer. These tasks can also be useful in any other role when you want to customize the ways GameObjects behave. Although many tasks in Unity don’t require programming, it can also be helpful to understand these fundamentals.
+
+In these tutorials, you will create a simple script and add it to a GameObject as a component. You will be introduced to the Integrated Development Environment (IDE) that comes with Unity, and explore the default script that every Unity programmer starts from. You will change a GameObject using a script to get a glimpse of the possibilities of scripting for your own projects.
+
+I expanded upon the previous lava challenge project and added behaviours only possible with script components attached to GameObjects.
+I learned how to:
+* increment/decrement GameObjects position, rotation, and scale
+* practice applying behaviours in an 3D environment
+
 ### Learn Unity
 Learn how Unity fits in with the broader creative industry of real-time development, and prepare to continue your learning journey.
 
