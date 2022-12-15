@@ -10,11 +10,8 @@ area of interest.
 
 ### Skills to Learn
 
-### Get Started with Unity
-This mission will guide you from first install of the Unity editor to creating your first Unity projects to play and share with others.
-
 ### Explore Unity
-Learn what Unity is and how it’s used while creating simple 2D and 3D real-time experiences from scratch.
+Learn what Unity is and how it’s used while creating simple 2D and 3D real-time experiences from scratch. This mission will guide you from first install of the Unity editor to creating your first Unity projects to play and share with others.
 
 #### Foundations of Real-time 3D
 In this learning project, you will be introduced to some of the essential tasks of an artist, game developer, or other creator of interactive 3D experiences. 
