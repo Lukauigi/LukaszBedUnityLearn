@@ -42,6 +42,9 @@ I learned how to:
 * increment/decrement GameObjects position, rotation, and scale
 * practice applying behaviours in an 3D environment
 
+#### Essentials of Real-time Audio
+In this learning project, you’ll start in a pre-made 3D project where you can explore and experiment with audio in Unity. In addition to setting background music, you will experience the ways that Unity simulates the ways sound behaves in a 3D space. 
+
 ### Learn Unity
 Learn how Unity fits in with the broader creative industry of real-time development, and prepare to continue your learning journey.
 
