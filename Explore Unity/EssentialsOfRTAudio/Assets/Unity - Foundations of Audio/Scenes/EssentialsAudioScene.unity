@@ -8429,7 +8429,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f185ed7b46354fc4e8bb8c03f138b043, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.743
+  m_Volume: 0.603
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -10232,6 +10232,7 @@ GameObject:
   - component: {fileID: 1903275409}
   - component: {fileID: 1903275408}
   - component: {fileID: 1903275410}
+  - component: {fileID: 1903275411}
   m_Layer: 0
   m_Name: Bird
   m_TagString: Untagged
@@ -10362,10 +10363,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643f1a5c3d3cc484aab1e453c76408c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionChange: {x: 0.03, y: 0, z: 0}
+--- !u!114 &1903275411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903275407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78143acb15974bb4181c41b960e050dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   birdChirpOne: {fileID: 8300000, guid: 75ae1f2b9b5ab824aa0fe620742ec76a, type: 3}
   birdChirpTwo: {fileID: 8300000, guid: c9c514fa8ad615641b30134ffbbda839, type: 3}
   birdChirpThree: {fileID: 8300000, guid: c65281d11f58ee24298f2f3ad7682b6e, type: 3}
-  positionChange: {x: 0.03, y: 0, z: 0}
 --- !u!4 &1913626909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: dc286069d2058a44782e0f8a66850020,
