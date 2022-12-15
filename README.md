@@ -44,7 +44,7 @@ In this learning project, you’ll start in a pre-made 3D project where you can 
 
 I imported a playable scene and edited aspects of volume within it.
 I learned how to:
-* implement 3D audio
+* implement 3D audio (use rolloff to adjust volume around audio source)
 
 ### Learn Unity
 Learn how Unity fits in with the broader creative industry of real-time development, and prepare to continue your learning journey.
