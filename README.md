@@ -58,6 +58,13 @@ I learned how to:
 
 Link to demo on Unity Play: https://play.unity.com/mg/other/outputs-x
 
+#### Essentials of Real-time 2D
+https://learn.unity.com/project/essentials-of-real-time-2d?uv=2021.3&pathwayId=5f7bcab4edbc2a0023e9c38f&missionId=5f777d9bedbc2a001f6f5ec7
+
+In this learning project, you will be introduced to some of the essential tasks of an artist, game developer, or other creator of interactive 2D experiences. You’ll build on your knowledge of real-time 3D creation while experiencing the simplicity and requirements of the 2D environment. 2D creation is not only useful for creating 2D games, but also for building user interfaces in many types of projects.
+
+
+
 ### Learn Unity
 Learn how Unity fits in with the broader creative industry of real-time development, and prepare to continue your learning journey.
 
