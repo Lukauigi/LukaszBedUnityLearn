@@ -30,6 +30,7 @@ I learned how to:
 * change colour of directional light,
 * change camera view in 3D,
 * build & deploy a WebGL app on Unity Play.
+* edit the prefab GameObject & variants of it
 
 Link to demo on Unity Play: https://play.unity.com/mg/other/lava-challenge-16
 
