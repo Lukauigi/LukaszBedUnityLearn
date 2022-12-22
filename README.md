@@ -64,12 +64,12 @@ https://learn.unity.com/project/essentials-of-real-time-2d?uv=2021.3&pathwayId=5
 
 In this learning project, you will be introduced to some of the essential tasks of an artist, game developer, or other creator of interactive 2D experiences. You’ll build on your knowledge of real-time 3D creation while experiencing the simplicity and requirements of the 2D environment. 2D creation is not only useful for creating 2D games, but also for building user interfaces in many types of projects.
 
+Downloading the Unity Assets has issues. Below is the thread containing fixes to common issues:
+https://forum.unity.com/threads/2d-game-kit-official-thread.517249/page-11
+
 I learned that:
 * a Rigidbody component controls how the GameObject interacts with gravity and air density
 * a collider component controls how the GameObject interacts with other objects
-
-### Learn Unity
-Learn how Unity fits in with the broader creative industry of real-time development, and prepare to continue your learning journey.
-
-Work TBD
-
+* handle collision between objects
+* 2D physics
+* put together a 2D mini-project
