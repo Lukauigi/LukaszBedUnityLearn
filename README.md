@@ -15,6 +15,8 @@ area of interest.
 ### Explore Unity
 Learn what Unity is and how it’s used while creating simple 2D and 3D real-time experiences from scratch. This mission will guide you from first install of the Unity editor to creating your first Unity projects to play and share with others.
 
+###### How to get the Publish button for WebGL projects: https://answers.unity.com/questions/1823468/publish-button-for-webgl-project-is-not-available.html
+
 #### Foundations of Real-time 3D
 https://learn.unity.com/project/essentials-of-real-time-3d?uv=2021.3&pathwayId=5f7bcab4edbc2a0023e9c38f&missionId=5f777d9bedbc2a001f6f5ec7
 
