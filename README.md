@@ -10,7 +10,33 @@ create in the Unity Editor and bring your vision to life. Experience hands-on le
 support you in creating your best projects. Completing this Pathway will equip you with the foundation you need to further your learning and specialize in your 
 area of interest.
 
-### Skills to Learn
+### Skills
+Absolute Beginner Project Setup & Settings
+* Install the Unity Editor for the first time
+* Create and manage projects in the Unity Hub
+Unity Editor Essentials
+* Identify and use essential features of the Unity Editor.
+* Create and Manage Scenes
+* Navigate in 3D space in the Scene view
+* Navigate in 2D space in the Scene view
+Real-time Industry Essentials
+* Understand Unity’s history and role within the industries that rely on real-time creation.
+* Describe the real-time production cycle
+Scene Building Essentials
+* Identify the default elements in a new Scene
+* Create GameObjects
+* Manipulate GameObjects
+* Work with components and Scripts
+* Change the appearance of GameObjects
+* Implement basic physics for GameObjects
+Publishing
+* Create and share a basic build
+Absolute Beginner Job preparation
+* Prepare yourself for the job search
+* Create a portfolio, enabling you to pursue a job in real-time development
+* Cultivate professional attitudes
+* Plan your Unity learning journey by setting goals
+* Practice continuous personal and professional growth
 
 ### Explore Unity
 Learn what Unity is and how it’s used while creating simple 2D and 3D real-time experiences from scratch. This mission will guide you from first install of the Unity editor to creating your first Unity projects to play and share with others.
