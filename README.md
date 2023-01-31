@@ -2,7 +2,7 @@
 
 This is the master directory of all Unity Learn tutorials worked on & completed by Lukasz Bednarek.
 
-## Unity Essentials
+# Unity Essentials Pathway
 https://learn.unity.com/pathway/unity-essentials?uv=2021.3
 
 Designed for anyone new to Unity, this guided learning journey is your first step toward gaining the background, context, and skills you need to confidently 
@@ -10,7 +10,7 @@ create in the Unity Editor and bring your vision to life. Experience hands-on le
 support you in creating your best projects. Completing this Pathway will equip you with the foundation you need to further your learning and specialize in your 
 area of interest.
 
-### Skills
+## Skills
 Absolute Beginner Project Setup & Settings
 * Install the Unity Editor for the first time
 * Create and manage projects in the Unity Hub
@@ -43,12 +43,12 @@ Absolute Beginner Job preparation
 * Plan your Unity learning journey by setting goals
 * Practice continuous personal and professional growth
 
-### Explore Unity
+## Explore Unity
 Learn what Unity is and how it’s used while creating simple 2D and 3D real-time experiences from scratch. This mission will guide you from first install of the Unity editor to creating your first Unity projects to play and share with others.
 
-###### How to get the Publish button for WebGL projects: https://answers.unity.com/questions/1823468/publish-button-for-webgl-project-is-not-available.html
+##### How to get the Publish button for WebGL projects: https://answers.unity.com/questions/1823468/publish-button-for-webgl-project-is-not-available.html
 
-#### Foundations of Real-time 3D
+### Foundations of Real-time 3D
 https://learn.unity.com/project/essentials-of-real-time-3d?uv=2021.3&pathwayId=5f7bcab4edbc2a0023e9c38f&missionId=5f777d9bedbc2a001f6f5ec7
 
 In this learning project, you will be introduced to some of the essential tasks of an artist, game developer, or other creator of interactive 3D experiences. 
@@ -67,7 +67,7 @@ I learned how to:
 
 Link to demo on Unity Play: https://play.unity.com/mg/other/lava-challenge-16
 
-#### Essentials of Programming in Unity
+### Essentials of Programming in Unity
 https://learn.unity.com/project/essentials-of-programming-in-unity?uv=2021.3&pathwayId=5f7bcab4edbc2a0023e9c38f&missionId=5f777d9bedbc2a001f6f5ec7
 
 This learning project will give you a sample of the essential tasks of a Unity programmer. These tasks can also be useful in any other role when you want to customize the ways GameObjects behave. Although many tasks in Unity don’t require programming, it can also be helpful to understand these fundamentals.
@@ -79,7 +79,7 @@ I learned how to:
 * increment/decrement GameObjects position, rotation, and scale
 * practice applying behaviours in an 3D environment
 
-#### Essentials of Real-time Audio
+### Essentials of Real-time Audio
 https://learn.unity.com/project/essentials-of-real-time-audio?uv=2021.3&pathwayId=5f7bcab4edbc2a0023e9c38f&missionId=5f777d9bedbc2a001f6f5ec7
 
 In this learning project, you’ll start in a pre-made 3D project where you can explore and experiment with audio in Unity. In addition to setting background music, you will experience the ways that Unity simulates the ways sound behaves in a 3D space. 
@@ -92,7 +92,7 @@ I learned how to:
 
 Link to demo on Unity Play: https://play.unity.com/mg/other/outputs-x
 
-#### Essentials of Real-time 2D
+### Essentials of Real-time 2D
 https://learn.unity.com/project/essentials-of-real-time-2d?uv=2021.3&pathwayId=5f7bcab4edbc2a0023e9c38f&missionId=5f777d9bedbc2a001f6f5ec7
 
 In this learning project, you will be introduced to some of the essential tasks of an artist, game developer, or other creator of interactive 2D experiences. You’ll build on your knowledge of real-time 3D creation while experiencing the simplicity and requirements of the 2D environment. 2D creation is not only useful for creating 2D games, but also for building user interfaces in many types of projects.
@@ -106,3 +106,30 @@ I learned that:
 * handle collision between objects
 * 2D physics
 * put together a 2D mini-project
+
+
+
+# Junior Programmer Pathway
+https://learn.unity.com/pathway/junior-programmer?uv=2021.3
+Designed for anyone interested in learning to code or obtaining an entry-level Unity role, this pathway assumes a basic knowledge of Unity and has no math prerequisites. Junior Programmer prepares you to get Unity Certified so that you can demonstrate your job-readiness to employers.
+
+## Mission Outline
+
+* Create with Code 1
+* Create with Code 2
+* Manage scene flow and data
+* Apply object-oriented principles
+
+## Skills
+* Absolute Beginner Code Comprehension
+* Absolute Beginner Application Scripting
+* Absolute Beginner Debugging
+* Beginner Application scripting
+* Absolute Beginner Version control
+* Absolute Beginner Code optimization
+* Beginner Programming theory
+
+### Create with Code 1
+Learn about fundamental programming concepts such as variables, functions and basic logic through two practical projects.
+
+
