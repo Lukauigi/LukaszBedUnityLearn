@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The bridge between the player & their character.
+/// 
+/// Author: Lukasz Bednarek
+/// Date: 2023-02-03
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _speed = 5.0f;
