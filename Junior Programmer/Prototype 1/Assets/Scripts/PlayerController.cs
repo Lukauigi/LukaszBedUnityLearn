@@ -10,8 +10,10 @@ using UnityEngine;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5.0f;
-    [SerializeField] private float _turnSpeed;
+
+    // Private fields
+    [SerializeField] private float _speed = 12.0f;
+    [SerializeField] private float _turnSpeed = 24.0f;
     [SerializeField] private float _horizontalInput;
     [SerializeField] private float _forwardInput;
 
@@ -24,20 +26,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Get the input when the player presses left or right arrow keys
+        // Gets the input when the player presses the cardinal arrow keys
         _horizontalInput = Input.GetAxis("Horizontal");
-        // Get the input when the player presses up or down arrow keys
         _forwardInput = Input.GetAxis("Vertical");
 
-        // Move the vehicle forward
+        // Move the vehicle forward or backward
+
         // Gets the transform component of the current object & use the translate method to move the vehicle
         // Vector3.forward is a cleaner way to use transform.Translate(0, 0, 1);
+
         // Use deltatime to move the vehicle every second instead of frames that could be variable on different users' devices
         transform.Translate(Vector3.forward * Time.deltaTime * _speed * _forwardInput);
 
         // Move the vehicle to the right or left
-        //transform.Translate(Vector3.right * Time.deltaTime * _turnSpeed * _horizontalInput);
-        // Use Rotate method to turn the vehicle more realistically. Done by pivoting the object's y axis
+
+        // transform.Translate(Vector3.right * Time.deltaTime * _turnSpeed * _horizontalInput);
+        // using this code above will make the vehicle visually laterally. Not realistic looking.
+
+        // Use Rotate method to turn the vehicle more realistically. Done by pivoting the object's rotation y axis
         transform.Rotate(Vector3.up, Time.deltaTime * _turnSpeed * _horizontalInput);
     }
 }

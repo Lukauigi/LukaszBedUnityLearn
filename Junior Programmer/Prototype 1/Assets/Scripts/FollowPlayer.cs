@@ -10,6 +10,7 @@ using UnityEngine;
 /// </summary>
 public class FollowPlayer : MonoBehaviour
 {
+
     public GameObject player;
     [SerializeField] private Vector3 _offset = new Vector3(0, 5, -7); // the position offset from the camera to the player
 
