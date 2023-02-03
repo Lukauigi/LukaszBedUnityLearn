@@ -133,4 +133,10 @@ Designed for anyone interested in learning to code or obtaining an entry-level U
 ### Create with Code 1
 Learn about fundamental programming concepts such as variables, functions and basic logic through two practical projects.
 
+#### Highlights
+
+* How to handle movement elegently
+* Have camera follow player w/o jitter
+* Change colour tint when entering PlayMode
+* Good practice of variables & access modifiers
 
