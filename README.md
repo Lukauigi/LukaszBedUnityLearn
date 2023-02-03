@@ -136,7 +136,17 @@ Learn about fundamental programming concepts such as variables, functions and ba
 #### Highlights
 
 * How to handle movement elegently
+    * Vector3.forward => shortcut for position(0,0,1) (moving up, in relation to local GameObject position)
+    * Time.deltaTime to move vehicle every second opposed to frames, which could be variable on devices
+    * transform.Translate for the vehicle to move forward & backward
+    * Vector3.up => shortcut for pivoting the GameObject's y rotation to have it turn along the ground
+    * transform.Rotate while changing its y rotation axis for the vehicle to turn more realistically
 * Have camera follow player w/o jitter
+    * Use LateUpdate() method to have the parent GameObject update after all other GameObjects
 * Change colour tint when entering PlayMode
+    * Edit => Preferences => Colors => PlayModeTint
 * Good practice of variables & access modifiers
+    * [SerializeField] with private modifiers to encapsulate variable, but allow editing in the editor
+* Handling player directional input (old method)
+    * Input.GetAxis("Vertical/Horizontal"), Unity handles most of the work
 
