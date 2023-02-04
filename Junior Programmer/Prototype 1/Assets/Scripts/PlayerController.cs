@@ -11,11 +11,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    // Private fields
+    // Private vars
     [SerializeField] private float _speed = 12.0f;
     [SerializeField] private float _turnSpeed = 24.0f;
     [SerializeField] private float _horizontalInput;
     [SerializeField] private float _forwardInput;
+
+    // Public fields
+    public float Speed { get { return _speed; } }
+    public float TurnSpeed { get { return _turnSpeed; } }
+    public float HorizontalInput { get { return _horizontalInput; } }
+    public float ForwardInput { get { return _forwardInput; } }
 
     // Start is called before the first frame update
     void Start()
