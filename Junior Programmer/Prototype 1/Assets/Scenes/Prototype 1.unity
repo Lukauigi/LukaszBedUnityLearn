@@ -3094,7 +3094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 358806368}
   _offset: {x: 0, y: 5, z: -7}
-  _fixedCam: 0
+  _fixedCam: 1
 --- !u!1001 &544185365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5706,6 +5706,9 @@ MonoBehaviour:
   - {fileID: 534669902}
   - {fileID: 1626903410}
   - {fileID: 1310118914}
+  _isMultiplayer: 0
+  _isP1: 1
+  _cameraToggleKey: 99
 --- !u!1001 &1098734988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6786,7 +6789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 358806368}
   _offset: {x: 0, y: 32, z: 10}
-  _fixedCam: 0
+  _fixedCam: 1
 --- !u!81 &1310118917
 AudioListener:
   m_ObjectHideFlags: 0
@@ -11031,6 +11034,10 @@ PrefabInstance:
     - target: {fileID: 8566710649664625659, guid: 0880dcfa8dc991c439b34d2d98d95144, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566710649664728111, guid: 0880dcfa8dc991c439b34d2d98d95144, type: 3}
+      propertyPath: _playerID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8566710649664882349, guid: 0880dcfa8dc991c439b34d2d98d95144, type: 3}
       propertyPath: m_RootOrder

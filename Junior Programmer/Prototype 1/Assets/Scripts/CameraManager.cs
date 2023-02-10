@@ -6,13 +6,15 @@ using UnityEngine;
 /// Handler of camera POV changes.
 /// 
 /// Author: Lukasz Bednarek
-/// Date: 2023-02-09
+/// Date: 2023-02-10
 /// </summary>
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _cameras;
     [SerializeField] private bool _isMultiplayer;
-    [SerializeField] private bool _isP1; 
+    [SerializeField] private bool _isP1;
+    [SerializeField] private KeyCode _cameraToggleKey;
+
     private int _cameraIndex;
     private Rect _P1MultiplayerViewport = new Rect(0, 0, 0.5f, 1);
     private Rect _P2MultiplayerViewport = new Rect(0.5f, 0, 0.5f, 1);
@@ -34,7 +36,7 @@ public class CameraManager : MonoBehaviour
     void Update()
     {
         // Change camera on C key press
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(_cameraToggleKey))
         {
             AssignNewCameraPOV();
         }
