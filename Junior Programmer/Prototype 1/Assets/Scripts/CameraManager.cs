@@ -11,11 +11,15 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _cameras;
+    [SerializeField] private bool _isMultiplayer;
     private int _cameraIndex;
+    private Rect _multiplayerViewport = new Rect(0, 0, 0.5f, 1);
 
     // Start is called before the first frame update
     void Start()
     {
+        if (_isMultiplayer) _cameras.ForEach(cam => cam.gameObject.GetComponent<Camera>().rect = _multiplayerViewport);
+        
         _cameraIndex = 1;
     }
 
