@@ -6,19 +6,26 @@ using UnityEngine;
 /// Handler of camera POV changes.
 /// 
 /// Author: Lukasz Bednarek
-/// Date: 2023-02-04
+/// Date: 2023-02-09
 /// </summary>
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _cameras;
     [SerializeField] private bool _isMultiplayer;
+    [SerializeField] private bool _isP1; 
     private int _cameraIndex;
-    private Rect _multiplayerViewport = new Rect(0, 0, 0.5f, 1);
+    private Rect _P1MultiplayerViewport = new Rect(0, 0, 0.5f, 1);
+    private Rect _P2MultiplayerViewport = new Rect(0.5f, 0, 0.5f, 1);
 
     // Start is called before the first frame update
     void Start()
     {
-        if (_isMultiplayer) _cameras.ForEach(cam => cam.gameObject.GetComponent<Camera>().rect = _multiplayerViewport);
+        if (_isMultiplayer) 
+        {
+            if (_isP1) _cameras.ForEach(cam => cam.GetComponent<Camera>().rect = _P1MultiplayerViewport);
+            else _cameras.ForEach(cam => cam.GetComponent<Camera>().rect = _P2MultiplayerViewport);
+        }
+        
         
         _cameraIndex = 1;
     }
