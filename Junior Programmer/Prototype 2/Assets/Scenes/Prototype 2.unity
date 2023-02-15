@@ -293,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _horizontalInput: 0
   _speed: 10
+  _xAxisRange: 20
 --- !u!1 &425805626
 GameObject:
   m_ObjectHideFlags: 0
