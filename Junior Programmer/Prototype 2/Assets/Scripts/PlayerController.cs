@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed = 10.0f;
     [SerializeField] private float _xAxisRange = 20.0f;
 
+    public GameObject projectilePrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,14 +26,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check for movement restriction range left of player
         if (transform.position.x < -_xAxisRange)
         {
             transform.position = new Vector3(-_xAxisRange, transform.position.y, transform.position.z);
         }
-
+        // check for movement restriction range right of player
         if (transform.position.x > _xAxisRange)
         {
             transform.position = new Vector3(_xAxisRange, transform.position.y, transform.position.z);
+        }
+
+        // check for key press to fire projectile prefab
+        if (Input.GetKeyDown(KeyCode.Space)) //gets input once when key is pressed
+        {
+            Instantiate(projectilePrefab, transform.position, transform.rotation);
         }
 
         _horizontalInput = Input.GetAxis("Horizontal");
