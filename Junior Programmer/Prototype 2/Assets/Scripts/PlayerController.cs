@@ -11,9 +11,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Encapsulated vars changable in editor
-    [SerializeField] float _horizontalInput;
-    [SerializeField] float _speed = 10.0f;
-    [SerializeField] float _xAxisRange = 20.0f;
+    [SerializeField] private float _horizontalInput;
+    [SerializeField] private float _speed = 10.0f;
+    [SerializeField] private float _xAxisRange = 20.0f;
 
     // Start is called before the first frame update
     void Start()
