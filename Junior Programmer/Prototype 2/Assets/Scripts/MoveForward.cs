@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Handler of shooting projectile behaviour.
+/// Handler of objects moving forward.
 /// 
 /// Author: Lukasz Bednarek
 /// Date: 2023-02-14
 /// </summary>
-public class FireProjectile : MonoBehaviour
+public class MoveForward : MonoBehaviour
 {
     // Encapsulated vars editable in editor
     [SerializeField] private float _speed = 40.0f;
