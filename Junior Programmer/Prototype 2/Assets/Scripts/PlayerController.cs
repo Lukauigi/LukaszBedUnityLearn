@@ -6,13 +6,13 @@ using UnityEngine;
 /// Handler of player input.
 /// 
 /// Author: Lukasz Bednarek
-/// Date: 2023-02-14
+/// Date: 2023-02-16
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
     // Encapsulated vars changable in editor
     [SerializeField] private float _horizontalInput;
-    [SerializeField] private float _speed = 10.0f;
+    [SerializeField] private float _speed = 20.0f;
     [SerializeField] private float _xAxisRange = 20.0f;
 
     public GameObject projectilePrefab;

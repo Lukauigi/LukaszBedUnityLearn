@@ -6,12 +6,13 @@ using UnityEngine;
 /// Destroys object when it is out of its designated bounds.
 /// 
 /// Author: Lukasz Bednarek
-/// Date: 2023-02-14
+/// Date: 2023-02-16
 /// </summary>
 public class DestroyOutOfBounds : MonoBehaviour
 {
-    // Encapsulated vars
-    private float _zAxisBound = 30;
+    // Encapsulated vars, bounds to destroy object
+    private readonly float _topZAxisBound = 30;
+    private readonly float _btmZAxisBound = -10;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +24,13 @@ public class DestroyOutOfBounds : MonoBehaviour
     void Update()
     {
         // destroys scripts's parent object when object exceeds the z axis bound too far up or down
-        if (transform.position.z > _zAxisBound || transform.position.z < -_zAxisBound)
+        if (transform.position.z > _topZAxisBound)
         {
+            Destroy(gameObject);
+        }
+        else if (transform.position.z < _btmZAxisBound)
+        {
+            print("Game Over!");
             Destroy(gameObject);
         }
     }
