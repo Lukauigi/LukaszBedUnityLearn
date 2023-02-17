@@ -99,7 +99,7 @@ public class Cube : MonoBehaviour
     /// Date: 2023-02-16
     /// </summary>
     /// <param name="vector">A 3D vector.</param>
-    /// <returns></returns>
+    /// <returns>A random Vector3 not the same as the given Vector3.</returns>
     private Vector3 UniqueRandom3DVector(Vector3 vector)
     {
         Vector3 newVector;
