@@ -46,10 +46,14 @@ public class Cube : MonoBehaviour
     public MeshRenderer Renderer;
     
     void Start()
-    {        
-        Material material = Renderer.material;     
+    {
+        // Access & change the cube's colour.
+        Material material = Renderer.material;
+        RandomizeColor();
         material.color = new Color(_redComponent, _greenComponent, _blueComponent, _alphaComponent);
+
         RandomizeXYZRotation();
+        // Randomize the cube's properties throughout intervals of its life
         InvokeRepeating(nameof(RandomizeCubeProperties), _startDelay, _invokeInterval);
     }
     
@@ -117,7 +121,7 @@ public class Cube : MonoBehaviour
     }
 
     /// <summary>
-    /// Edits the cube's degree of rotation on x, y, and z axis angles.
+    /// Edits the cube's degree of rotation on x, y, and z axis angles with random values.
     /// 
     /// Date: 2023-02-16
     /// </summary>
@@ -126,6 +130,19 @@ public class Cube : MonoBehaviour
         _xAxisRotation = Random.Range(_rotationLowerBound, _rotationSpeedUpperBound);
         _yAxisRotation = Random.Range(_rotationLowerBound, _rotationSpeedUpperBound);
         _zAxisRotation = Random.Range(_rotationLowerBound, _rotationSpeedUpperBound);
+    }
+
+    /// <summary>
+    /// Randomizes the cube's colour component values.
+    /// 
+    /// Date: 2023-02-17
+    /// </summary>
+    private void RandomizeColor()
+    {
+        _redComponent = Random.Range(_minColorRange, _maxColorRange);
+        _greenComponent = Random.Range(_minColorRange, _maxColorRange);
+        _blueComponent = Random.Range(_minColorRange, _maxColorRange);
+        _alphaComponent = Random.Range(_minColorRange, _maxColorRange);
     }
 
     /// <summary>
