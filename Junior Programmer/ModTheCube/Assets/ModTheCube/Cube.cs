@@ -26,19 +26,30 @@ public class Cube : MonoBehaviour
     // Degrees of rotation range
     private readonly float _rotationLowerBound = 0;
     private readonly float _rotationSpeedUpperBound = 180;
+    // Colour components of material colour
+    private float _redComponent = 0.14f;
+    private float _greenComponent = 0.33f;
+    private float _blueComponent = 0.69f;
+    private float _alphaComponent = 0.75f;
+    // Colour increment/decrement toggles: increment is true, decrement is false
+    private bool _redIncrement = true;
+    private bool _greenIncrement = true;
+    private bool _blueIncrement = true;
+    private bool _alphaIncrement = true;
+    // Colour component range
+    private readonly float _minColorRange = 0;
+    private readonly float _maxColorRange = 1;
+    private readonly float _colorComponentChangeRate = 0.07f;
 
     public Vector3[] locations;
 
     public MeshRenderer Renderer;
     
     void Start()
-    {
-        
-        //transform.localScale = Vector3.one * 1.3f;
-        
+    {        
         Material material = Renderer.material;
         
-        material.color = new Color(0.5f, 1.0f, 0.3f, 0.4f);
+        material.color = new Color(_redComponent, _greenComponent, _blueComponent, _alphaComponent);
 
         RandomizeXYZRotation();
 
@@ -48,6 +59,11 @@ public class Cube : MonoBehaviour
     void Update()
     {
         transform.Rotate(_xAxisRotation * Time.deltaTime, _yAxisRotation * Time.deltaTime, _zAxisRotation * Time.deltaTime);
+
+        ProgressiveColorComponentChange(ref _redComponent, ref _redIncrement);
+        ProgressiveColorComponentChange(ref _greenComponent, ref _greenIncrement);
+        ProgressiveColorComponentChange(ref _blueComponent, ref  _blueIncrement);
+        ProgressiveColorComponentChange(ref _alphaComponent, ref _alphaIncrement);
     }
 
     /// <summary>
@@ -131,5 +147,55 @@ public class Cube : MonoBehaviour
         _xAxisRotation = Random.Range(_rotationLowerBound, _rotationSpeedUpperBound);
         _yAxisRotation = Random.Range(_rotationLowerBound, _rotationSpeedUpperBound);
         _zAxisRotation = Random.Range(_rotationLowerBound, _rotationSpeedUpperBound);
+    }
+
+    /// <summary>
+    /// Changes the given cube colour component colour slighty between min and max colour value ranges.
+    /// 
+    /// The colour component slightly increments until it reaches the maximum, then it will decrement 
+    /// until it reaches the minimum value, and repeats this process. Minimum and maximum values are 
+    /// 0 and 1 respectively. 
+    /// 
+    /// Date: 2023-02-17
+    /// </summary>
+    /// <param name="colorComponent">The reference to the colour component variable.</param>
+    /// <param name="increment">The reference to the colour component's increment variable.</param>
+    private void ProgressiveColorComponentChange(ref float colorComponent, ref bool increment)
+    {
+        // Increments or decrements based on the increment toggle
+        GradualColorComponentChange(ref colorComponent, increment);
+        // Changes the increment toggle based 
+        SetColourComponentIncrementToggle(colorComponent, ref increment);
+        // Sets slightly changed cube colour
+        Renderer.material.color = new Color(_redComponent, _greenComponent, _blueComponent, _alphaComponent);
+    }
+
+    /// <summary>
+    /// Changes the colour value of the component slightly by incrementing/decrementing it based on the passed
+    /// 
+    /// Date: 2023-02-17
+    /// </summary>
+    /// <param name="colorComponent">The reference to the colour component variable.</param>
+    /// <param name="increment">The boolean value for whether to increment colour component's value.</param>
+    private void GradualColorComponentChange(ref float colorComponent, bool increment)
+    {
+        if (increment) colorComponent += Time.deltaTime * _colorComponentChangeRate;
+        else if (!increment) colorComponent -= Time.deltaTime * _colorComponentChangeRate;
+    }
+
+    /// <summary>
+    /// Changes the increment toggle of given colour component if the colour component's value is beyond 
+    /// a minimum or maximum threshold.
+    /// 
+    /// The minimum and maximum thresholds are 0 and 1 respectively.
+    /// 
+    /// Date: 2023-02-17
+    /// </summary>
+    /// <param name="colorComponent">The float value of the colour component.</param>
+    /// <param name="increment">The reference to the colour component's increment variable.</param>
+    private void SetColourComponentIncrementToggle(float colorComponent, ref bool increment)
+    {
+        if (colorComponent >= _maxColorRange) increment = false;
+        else if (colorComponent <= _minColorRange) increment = true;
     }
 }
