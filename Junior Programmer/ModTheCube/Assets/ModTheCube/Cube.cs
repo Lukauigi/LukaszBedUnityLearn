@@ -6,53 +6,50 @@ using UnityEngine;
 /// Handler of the behaviour of the cube.
 /// 
 /// Author: Lukasz Bednarek
-/// Date: 2023-02-16
+/// Date: 2023-02-17
 /// </summary>
 public class Cube : MonoBehaviour
 {
-    // invoke repeat times
+    // Invoke repeat times.
     private readonly float _startDelay = 0;
     private readonly float _invokeInterval = 4f;
-
-    //private bool _firstCycle = true;
+    // Index of current cube location.
     private int _locationIndex;
+    // Rotation values all axises.
     private float _xAxisRotation;
     private float _yAxisRotation;
     private float _zAxisRotation;
-
-    // Scale range of the cube
+    // Scale range of the cube.
     private readonly float _scaleLowerBound = 1;
     private readonly float _scaleUpperBound = 5;
-    // Degrees of rotation range
+    // Degrees of rotation range.
     private readonly float _rotationLowerBound = 0;
     private readonly float _rotationSpeedUpperBound = 180;
-    // Colour components of material colour
+    // Colour components of material colour.
     private float _redComponent = 0.14f;
     private float _greenComponent = 0.33f;
     private float _blueComponent = 0.69f;
     private float _alphaComponent = 0.75f;
-    // Colour increment/decrement toggles: increment is true, decrement is false
+    // Colour increment/decrement toggles: increment is true, decrement is false.
     private bool _redIncrement = true;
     private bool _greenIncrement = true;
     private bool _blueIncrement = true;
     private bool _alphaIncrement = true;
-    // Colour component range
+    // Colour component range.
     private readonly float _minColorRange = 0;
     private readonly float _maxColorRange = 1;
+    // Rate of which the cube's colour components change.
     private readonly float _colorComponentChangeRate = 0.07f;
 
+    // Coordinates of various locations the cube teleports to.
     public Vector3[] locations;
-
     public MeshRenderer Renderer;
     
     void Start()
     {        
-        Material material = Renderer.material;
-        
+        Material material = Renderer.material;     
         material.color = new Color(_redComponent, _greenComponent, _blueComponent, _alphaComponent);
-
         RandomizeXYZRotation();
-
         InvokeRepeating(nameof(RandomizeCubeProperties), _startDelay, _invokeInterval);
     }
     
@@ -69,34 +66,16 @@ public class Cube : MonoBehaviour
     /// <summary>
     /// Randomzies various properties of the cube.
     /// 
-    /// Date: 2023-02-16
+    /// Date: 2023-02-17
     /// </summary>
     private void RandomizeCubeProperties()
     {
-        //Vector3 scale;
-        /*
-        if (!_firstCycle) // Is not the first invocation of method
-        {
-            // Change cube's location from set locations
-            _locationIndex = UniqueRandomIndex(_locationIndex, locations.Length);
-            scale = UniqueRandom3DVector();
-        }
-        else
-        {
-            // Change cube's location from set locations
-            _locationIndex = Random.Range(0, locations.Length);
-            scale = Vector3.one * Random.Range(_scaleLowerBound, _scaleUpperBound);
-
-            _firstCycle = false;
-        }
-        */
-        //transform.localScale = scale;
-
-        // Assign new random properties
+        // Teleports the cube to a new random location not the same as the last.
         _locationIndex = UniqueRandomIndex(_locationIndex, locations.Length);
         transform.position = locations[_locationIndex];
-
+        // Changes cube's scale randomly.
         transform.localScale = UniqueRandom3DVector(transform.localScale);
+        // Randomize the spin of the cube.
         RandomizeXYZRotation();
     }
 
@@ -162,11 +141,11 @@ public class Cube : MonoBehaviour
     /// <param name="increment">The reference to the colour component's increment variable.</param>
     private void ProgressiveColorComponentChange(ref float colorComponent, ref bool increment)
     {
-        // Increments or decrements based on the increment toggle
+        // Increments or decrements based on the increment toggle.
         GradualColorComponentChange(ref colorComponent, increment);
-        // Changes the increment toggle based 
+        // Changes the increment toggle based.
         SetColourComponentIncrementToggle(colorComponent, ref increment);
-        // Sets slightly changed cube colour
+        // Sets slightly changed cube colour.
         Renderer.material.color = new Color(_redComponent, _greenComponent, _blueComponent, _alphaComponent);
     }
 
