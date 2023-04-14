@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private float _jumpForce;
     [SerializeField, Tooltip("The gravity rate of the player.")]
     private float _gravityModifier;
+    [SerializeField]
+    private bool _isGrounded = true;
 
     // Refs to component(s)
     private Rigidbody playerRb;
@@ -28,9 +30,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
             playerRb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse); //use impulse ForceMode to simulate an object suddenly receiving a push.
+            _isGrounded = false;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        _isGrounded = true;
     }
 }
