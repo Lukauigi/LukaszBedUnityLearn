@@ -135,6 +135,7 @@ Learn about fundamental programming concepts such as variables, functions and ba
 
 #### Highlights
 
+##### Unit 1: Player Control
 * How to handle movement elegently
     * Vector3.forward => shortcut for position(0,0,1) (moving up, in relation to local GameObject position)
     * Time.deltaTime to move vehicle every second opposed to frames, which could be variable on devices
@@ -150,3 +151,23 @@ Learn about fundamental programming concepts such as variables, functions and ba
 * Handling player directional input (old method)
     * Input.GetAxis("Vertical/Horizontal"), Unity handles most of the work
 
+##### Unit 2: Gameplay Mechanics
+* Importing project assets
+    * XX => XX => XX
+* Limit player movement
+    * Store horizontal movement input in a variable: float xInput = Input.GetAxis("Horizontal");
+    * Use variable(s) for bounds which players cannot move beyond
+* Handle keyboard input (space bar)
+    * Space bar: instantiate a prefab object in scene
+    * if Input.GetKeyDown(KeyCode.Space) then ...
+* Destroy OOB objects in scene
+* Handle random spawning of prefabs from a list
+    * Serialize list in editor. Initialize the list size and drag in the prefab objects.
+    * Get a random from 0 to size of list to create that certain prefab
+    * Change camera perspective: Perspective & Orthographic
+* Add & edit a collider on a gameobject
+    * Set no gravity in editor
+    * Set collider as a trigger in editor
+    * Use OnTriggerEnter when other objects intersects into the collider
+* Repeat an action from the start of an object's life:
+    * In Start() method: InvokeRepeating()
