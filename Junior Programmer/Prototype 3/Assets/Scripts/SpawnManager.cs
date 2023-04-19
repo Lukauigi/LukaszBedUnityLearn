@@ -16,17 +16,19 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField, Tooltip("Obstacle prefab to spawn periodically.")]
     private GameObject _obstaclePrefab;
+
+    private float _startDelay = 2;
+    private float _repeatRate = 2;
     private Vector3 _spawnPos = new Vector3(25, 0, 0);
 
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(_obstaclePrefab, _spawnPos, _obstaclePrefab.transform.rotation);
+        InvokeRepeating("SpawnObstacle", _startDelay, _repeatRate);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SpawnObstacle()
     {
-        
+        Instantiate(_obstaclePrefab, _spawnPos, _obstaclePrefab.transform.rotation);
     }
 }
