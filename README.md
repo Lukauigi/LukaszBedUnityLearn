@@ -171,3 +171,15 @@ Learn about fundamental programming concepts such as variables, functions and ba
     * Use OnTriggerEnter when other objects intersects into the collider
 * Repeat an action from the start of an object's life:
     * In Start() method: InvokeRepeating()
+
+##### Unit 3: Sound & Effects
+* Add tags & Implement logic
+    * Add new tags & assign Prefabs/GameObjects a tag
+    * Use CompareTag() method to check specific instances
+* Get a GameObject's script & access variables (game over) while keeping those variables encapsulated
+    * Use GameObject.Find() to find the player object in scene
+    * Use GetComponent & store reference
+    * Use a field as a getter for private variables
+* A method to repeat a background
+    * Have it moving a direction
+    * When bg repeats, set bg to its start position
