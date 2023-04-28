@@ -183,3 +183,10 @@ Learn about fundamental programming concepts such as variables, functions and ba
 * A method to repeat a background
     * Have it moving a direction
     * When bg repeats, set bg to its start position
+* Animation basics
+    * How to preview an animation (pull up window at bottom of inspector if it is not visible)
+    * How to edit parameters
+    * Click arrows to see conditions for state changes
+    * Hold Alt while holding LMB to navigate easily
+    * How to edit parameters in script (SetBool, SetTrigger, SetInteger)
+    * RMB on a state block to set as default layer to be the initial state
