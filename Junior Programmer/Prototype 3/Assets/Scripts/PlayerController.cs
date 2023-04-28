@@ -22,12 +22,14 @@ public class PlayerController : MonoBehaviour
     public bool GameOver { get { return _gameOver; } }
 
     // Refs to component(s)
-    private Rigidbody playerRb;
+    private Rigidbody _playerRb;
+    private Animator _playerAnim;
 
     ///<inheritdoc />
     private void Start()
     {
-        playerRb = GetComponent<Rigidbody>();
+        _playerRb = GetComponent<Rigidbody>();
+        _playerAnim = GetComponent<Animator>();
         Physics.gravity *= _gravityModifier; // Modifies the rate of the player's gravity.
     }
 
@@ -36,8 +38,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
-            playerRb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse); //use impulse ForceMode to simulate an object suddenly receiving a push.
+            _playerRb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse); //use impulse ForceMode to simulate an object suddenly receiving a push.
             _isGrounded = false;
+            _playerAnim.SetTrigger("Jump_trig");
         }
     }
 
@@ -49,6 +52,9 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
+            _playerAnim.SetBool("Death_b", true);
+            _playerAnim.SetInteger("DeathType_int", 1); //Set to use the first type of death anim
+
             _gameOver = true;
             Debug.Log("Game Over");
         }
