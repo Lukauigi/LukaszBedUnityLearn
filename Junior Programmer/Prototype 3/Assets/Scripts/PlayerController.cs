@@ -21,9 +21,13 @@ public class PlayerController : MonoBehaviour
 
     public bool GameOver { get { return _gameOver; } }
 
-    // Refs to component(s)
+    // Refs to attatched component(s)
     private Rigidbody _playerRb;
     private Animator _playerAnim;
+
+    // Refs to child object(s)
+    [SerializeField, Tooltip("Reference to child particle effect.")]
+    private ParticleSystem _explosionParticle;
 
     ///<inheritdoc />
     private void Start()
@@ -54,7 +58,7 @@ public class PlayerController : MonoBehaviour
         {
             _playerAnim.SetBool("Death_b", true);
             _playerAnim.SetInteger("DeathType_int", 1); //Set to use the first type of death anim
-
+            _explosionParticle.Play();
             _gameOver = true;
             Debug.Log("Game Over");
         }
