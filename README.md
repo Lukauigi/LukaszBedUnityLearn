@@ -194,3 +194,7 @@ Learn about fundamental programming concepts such as variables, functions and ba
     * Play & stop audio
     * Play audio on loop
     * Edit audio source's parameters
+* Intro to Particle Effects
+    * Play and stop effects in scene window
+    * Edit paramters in editor
+    * Play & stop particle effects
