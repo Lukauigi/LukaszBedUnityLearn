@@ -17,6 +17,18 @@ public class PlayerControllerX : MonoBehaviour
     public AudioClip moneySound;
     public AudioClip explodeSound;
 
+    // Added vars
+    [SerializeField, Range(0, 5),
+        Tooltip("The offset between the top of the background & player control range.")]
+    private float _bgYUpperOffset;
+    [SerializeField, Range(0, 5),
+        Tooltip("The offset between the bottom of the background & player control range.")]
+    private float _bgYLowerOffset;
+    private float _bgYUpperBound;
+    private float _bgYLowerBound;
+    private bool _isTooHigh;
+    private bool _isTooLow;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +36,12 @@ public class PlayerControllerX : MonoBehaviour
         Physics.gravity *= gravityModifier;
         playerAudio = GetComponent<AudioSource>();
         playerRb = GetComponent<Rigidbody>(); //Forgot to assign rigidbody
+
+        float _bgYSize = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider>().size.y;
+        _bgYUpperBound = _bgYSize - _bgYUpperOffset;
+        _bgYLowerBound = _bgYLowerOffset;
+        print(_bgYUpperBound);
+        print(_bgYLowerBound);
 
         // Apply a small upward force at the start of the game
         playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
@@ -33,8 +51,11 @@ public class PlayerControllerX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckLowerYBound();
+        CheckUpperYBound();
+
         // While space is pressed and player is low enough, float up
-        if (Input.GetKeyDown(KeyCode.Space) && !gameOver)
+        if (Input.GetKeyDown(KeyCode.Space) && !_isTooHigh && !gameOver)
         {
             playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
         }
@@ -63,4 +84,15 @@ public class PlayerControllerX : MonoBehaviour
 
     }
 
+    private void CheckUpperYBound()
+    {
+        if (playerRb.transform.position.y >= _bgYUpperBound) _isTooHigh = true;
+        else _isTooHigh = false;
+    }
+
+    private void CheckLowerYBound()
+    {
+        if (playerRb.transform.position.y <= _bgYUpperBound) _isTooLow = true;
+        else _isTooLow = false;
+    }
 }
