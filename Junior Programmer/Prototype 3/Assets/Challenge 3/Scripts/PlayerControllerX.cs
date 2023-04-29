@@ -16,6 +16,7 @@ public class PlayerControllerX : MonoBehaviour
     private AudioSource playerAudio;
     public AudioClip moneySound;
     public AudioClip explodeSound;
+    public AudioClip hitLowerBoundSound;
 
     // Added vars
     [SerializeField, Range(0, 5),
@@ -26,8 +27,14 @@ public class PlayerControllerX : MonoBehaviour
     private float _bgYLowerOffset;
     private float _bgYUpperBound;
     private float _bgYLowerBound;
+
     private bool _isTooHigh;
     private bool _isTooLow;
+
+    private bool _lowerBoundElevationCooldown;
+    [SerializeField, Range(1, 4), Tooltip("Modifies the bounce off of the bottom of player bounds.")]
+    private float _lowerBoundFloatForceModifier;
+    private float _elevationCooldown = 1.5f;
 
 
     // Start is called before the first frame update
@@ -55,6 +62,7 @@ public class PlayerControllerX : MonoBehaviour
         CheckUpperYBound();
 
         StopFloatForceBeyondUpperBound();
+        ElevatationBeyondLowerBound();
 
         // While space is pressed and player is low enough, float up
         if (Input.GetKeyDown(KeyCode.Space) && !_isTooHigh && !gameOver)
@@ -100,7 +108,7 @@ public class PlayerControllerX : MonoBehaviour
     /// </summary>
     private void CheckLowerYBound()
     {
-        if (playerRb.transform.position.y <= _bgYUpperBound) _isTooLow = true;
+        if (playerRb.transform.position.y <= _bgYLowerBound) _isTooLow = true;
         else _isTooLow = false;
     }
 
@@ -110,5 +118,38 @@ public class PlayerControllerX : MonoBehaviour
     private void StopFloatForceBeyondUpperBound()
     {
         if (_isTooHigh) playerRb.velocity = new Vector3(0, 0);
+    }
+
+    /// <summary>
+    /// Determines if the balloon must be elevated from the lower bound.
+    /// </summary>
+    private void ElevatationBeyondLowerBound()
+    {
+        if (_isTooLow && !_lowerBoundElevationCooldown)
+        {
+            StartCoroutine(LowerBoundElevationCooldown());
+            ElevateFromLowerBound();
+            playerAudio.PlayOneShot(hitLowerBoundSound);
+        }
+    }
+
+    /// <summary>
+    /// Forces the ballown up from the lower bound.
+    /// </summary>
+    private void ElevateFromLowerBound()
+    {
+        playerRb.velocity = new Vector3(0, 0);
+        playerRb.AddForce(Vector3.up * (floatForce * _lowerBoundFloatForceModifier), ForceMode.Impulse);
+    }
+
+    /// <summary>
+    /// Waits for a cooldown before forced elevation.
+    /// </summary>
+    /// <returns>The time to wait before lower bound elevation is applied.</returns>
+    private IEnumerator LowerBoundElevationCooldown()
+    {
+        _lowerBoundElevationCooldown = true;
+        yield return new WaitForSeconds(_elevationCooldown);
+        _lowerBoundElevationCooldown = false;
     }
 }
