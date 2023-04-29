@@ -54,6 +54,8 @@ public class PlayerControllerX : MonoBehaviour
         CheckLowerYBound();
         CheckUpperYBound();
 
+        StopFloatForceBeyondUpperBound();
+
         // While space is pressed and player is low enough, float up
         if (Input.GetKeyDown(KeyCode.Space) && !_isTooHigh && !gameOver)
         {
@@ -94,5 +96,13 @@ public class PlayerControllerX : MonoBehaviour
     {
         if (playerRb.transform.position.y <= _bgYUpperBound) _isTooLow = true;
         else _isTooLow = false;
+    }
+
+    /// <summary>
+    /// Halts upward float force inflected upon the balloon.
+    /// </summary>
+    private void StopFloatForceBeyondUpperBound()
+    {
+        if (_isTooHigh) playerRb.velocity = new Vector3(0, 0);
     }
 }
