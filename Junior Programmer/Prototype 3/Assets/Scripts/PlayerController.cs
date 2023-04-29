@@ -10,20 +10,27 @@ using UnityEngine;
 /// </remarks>
 public class PlayerController : MonoBehaviour
 {
+    // Attributes
     [SerializeField, Tooltip("The force which propels the player into a jump.")]
     private float _jumpForce;
     [SerializeField, Tooltip("The gravity rate of the player.")]
     private float _gravityModifier;
-    [SerializeField]
+    [SerializeField, Tooltip("Indicator of whether the character is on the ground. For debugging only.")]
     private bool _isGrounded = true;
-    [SerializeField]
+    [SerializeField, Tooltip("Indicator of the game over state. For debugging only.")]
     private bool _gameOver = false;
 
+    // Sound Effects
+    [SerializeField, Tooltip("The character's jump sound effect.")]
+    private AudioClip _jumpSound;
+    [SerializeField, Tooltip("The character's game over sound effect.")]
+    private AudioClip _crashSound;
     public bool GameOver { get { return _gameOver; } }
 
     // Refs to attatched component(s)
     private Rigidbody _playerRb;
     private Animator _playerAnim;
+    private AudioSource _playerAudio;
 
     // Refs to child object(s)
     [SerializeField, Tooltip("Reference to child explosion particle effect.")]
@@ -36,10 +43,12 @@ public class PlayerController : MonoBehaviour
     {
         _playerRb = GetComponent<Rigidbody>();
         _playerAnim = GetComponent<Animator>();
+        _playerAudio = GetComponent<AudioSource>();
+
         Physics.gravity *= _gravityModifier; // Modifies the rate of the player's gravity.
     }
 
-    // Update is called once per frame
+    ///<inheritdoc />
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded && !_gameOver)
@@ -48,6 +57,7 @@ public class PlayerController : MonoBehaviour
             _isGrounded = false;
             _playerAnim.SetTrigger("Jump_trig");
             _runningDirtParticle.Stop();
+            _playerAudio.PlayOneShot(_jumpSound);
         }
     }
 
@@ -64,6 +74,8 @@ public class PlayerController : MonoBehaviour
             _playerAnim.SetInteger("DeathType_int", 1); //Set to use the first type of death anim
             _explosionParticle.Play();
             _runningDirtParticle.Stop();
+            _playerAudio.PlayOneShot(_crashSound);
+
             _gameOver = true;
             Debug.Log("Game Over");
         }
