@@ -26,8 +26,10 @@ public class PlayerController : MonoBehaviour
     private Animator _playerAnim;
 
     // Refs to child object(s)
-    [SerializeField, Tooltip("Reference to child particle effect.")]
+    [SerializeField, Tooltip("Reference to child explosion particle effect.")]
     private ParticleSystem _explosionParticle;
+    [SerializeField, Tooltip("Reference to child running dirt particle effect.")]
+    private ParticleSystem _runningDirtParticle;
 
     ///<inheritdoc />
     private void Start()
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
             _playerRb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse); //use impulse ForceMode to simulate an object suddenly receiving a push.
             _isGrounded = false;
             _playerAnim.SetTrigger("Jump_trig");
+            _runningDirtParticle.Stop();
         }
     }
 
@@ -53,12 +56,14 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             _isGrounded = true;
+            _runningDirtParticle.Play();
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
             _playerAnim.SetBool("Death_b", true);
             _playerAnim.SetInteger("DeathType_int", 1); //Set to use the first type of death anim
             _explosionParticle.Play();
+            _runningDirtParticle.Stop();
             _gameOver = true;
             Debug.Log("Game Over");
         }
