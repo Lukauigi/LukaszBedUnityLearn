@@ -86,12 +86,18 @@ public class PlayerControllerX : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Determines if the balloon is beyond or meets the upper bound.
+    /// </summary>
     private void CheckUpperYBound()
     {
         if (playerRb.transform.position.y >= _bgYUpperBound) _isTooHigh = true;
         else _isTooHigh = false;
     }
 
+    /// <summary>
+    /// Determines if the balloon is below or meets the lower bound.
+    /// </summary>
     private void CheckLowerYBound()
     {
         if (playerRb.transform.position.y <= _bgYUpperBound) _isTooLow = true;
