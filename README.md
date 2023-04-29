@@ -190,3 +190,7 @@ Learn about fundamental programming concepts such as variables, functions and ba
     * Hold Alt while holding LMB to navigate easily
     * How to edit parameters in script (SetBool, SetTrigger, SetInteger)
     * RMB on a state block to set as default layer to be the initial state
+* Utlize Audio
+    * Play & stop audio
+    * Play audio on loop
+    * Edit audio source's parameters
