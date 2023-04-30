@@ -13,7 +13,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ObstacleScriptableObject", menuName = "ScriptableObjects/Obstacle")]
 public class ObstacleScriptableObject : ScriptableObject
 {
-    [SerializeField, Range(1, 3), 
+    public static readonly int MaxStackCount = 3;
+
+    [SerializeField, Range(1, 3),
         Tooltip("The number of this obstacle which can be stacked upon one another")]
     private int _stackCount;
 

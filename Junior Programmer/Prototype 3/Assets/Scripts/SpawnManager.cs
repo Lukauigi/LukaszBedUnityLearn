@@ -41,10 +41,34 @@ public class SpawnManager : MonoBehaviour
         if (_playerController.GameOver == false)
         {
             int index = Random.Range(0, _obstaclePrefabs.Length);
+            int potentialStackCount = _obstaclePrefabs[index].GetComponent<Obstacle>().GetStackCount();
+            int stackCount = Random.Range(1, potentialStackCount+1);
 
             if (index != _boulderIndex)
             {
-                Instantiate(_obstaclePrefabs[index], _spawnPos, _obstaclePrefabs[index].transform.rotation);
+                // Get obstacle's y size to properlly stack each obstacle
+                float ySize = _obstaclePrefabs[index].GetComponent<BoxCollider>().size.y;
+
+                switch (stackCount)
+                {
+                    case 1:
+                        Instantiate(_obstaclePrefabs[index], _spawnPos, _obstaclePrefabs[index].transform.rotation);
+                        break;
+
+                    case 2:
+                        Instantiate(_obstaclePrefabs[index], _spawnPos, _obstaclePrefabs[index].transform.rotation);
+                        Instantiate(_obstaclePrefabs[index], new Vector3(25, ySize, 0), _obstaclePrefabs[index].transform.rotation);
+                        break;
+
+                    case 3:
+                        Instantiate(_obstaclePrefabs[index], _spawnPos, _obstaclePrefabs[index].transform.rotation);
+                        Instantiate(_obstaclePrefabs[index], new Vector3(25, ySize, 0), _obstaclePrefabs[index].transform.rotation);
+                        Instantiate(_obstaclePrefabs[index], new Vector3(25, ySize*2, 0), _obstaclePrefabs[index].transform.rotation);
+                        break;
+
+                    default:
+                        break;
+                }
             }
             else
             {
