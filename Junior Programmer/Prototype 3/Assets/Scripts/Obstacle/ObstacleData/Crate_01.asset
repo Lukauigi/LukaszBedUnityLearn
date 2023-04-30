@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92e772e2f2ade8b46b619d5a350bf581, type: 3}
-  m_Name: Prop_StoneWall_01
+  m_Name: Crate_01
   m_EditorClassIdentifier: 
-  _stackCount: 0
+  _stackCount: 3

@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fe72f815c33bd42a58958b96d4ca04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstaclePrefab: {fileID: 7978799206707226056, guid: cf4e9c79f3f657842b6de799c6896328, type: 3}
+  _obstaclePrefab: {fileID: 3147607852816233930, guid: 3daafb44485c0d246a13447882795c2d, type: 3}
 --- !u!4 &156681837
 Transform:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156681835}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.016275, y: 1.1499999, z: 0.060566902}
+  m_LocalPosition: {x: 15.016275, y: 0, z: 0.060566902}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
