@@ -152,7 +152,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fe72f815c33bd42a58958b96d4ca04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstaclePrefab: {fileID: 3147607852816233930, guid: 3daafb44485c0d246a13447882795c2d, type: 3}
+  _obstaclePrefabs:
+  - {fileID: 4503623473661029814, guid: 183257c51b267de4a834a7f9b1a2b2f5, type: 3}
+  - {fileID: 6785847805111360121, guid: d2d5aa72ac1b55047b38acee693f9411, type: 3}
+  - {fileID: 469642542263748457, guid: e7f960ec3997168479c14606465bf276, type: 3}
+  - {fileID: 2523598482614015244, guid: bae66b80b1c43ec4dbc7887380c104e7, type: 3}
+  - {fileID: 1403562601414272960, guid: 3956f4bf8d197eb4f8f66363d6038f30, type: 3}
+  - {fileID: 5866784173687118965, guid: 2889019e082855342b6c6eed9068e6fc, type: 3}
+  - {fileID: 3147607852816233930, guid: 3daafb44485c0d246a13447882795c2d, type: 3}
+  - {fileID: 1507421790569889575, guid: a541fa4b6df58c24b8966f0f570acb13, type: 3}
+  - {fileID: 850623841499463063, guid: 0c5c55303fab39f469a527b7e885a980, type: 3}
+  - {fileID: 875803310964521582, guid: 48dd5b2bc1bab764e9a8af83428f6dcc, type: 3}
 --- !u!4 &156681837
 Transform:
   m_ObjectHideFlags: 0
