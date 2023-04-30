@@ -19,7 +19,7 @@ public class SpawnManager : MonoBehaviour
 
     private float _startDelay = 2;
     private float _repeatRate = 2;
-    private Vector3 _spawnPos = new Vector3(25, 7, 0);
+    private Vector3 _spawnPos = new Vector3(25, 0, 0);
 
     // Refs to other component(s)
     private PlayerController _playerController;
