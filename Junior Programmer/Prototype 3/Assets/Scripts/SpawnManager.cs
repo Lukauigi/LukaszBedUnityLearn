@@ -49,6 +49,7 @@ public class SpawnManager : MonoBehaviour
                 // Get obstacle's y size to properlly stack each obstacle
                 float ySize = _obstaclePrefabs[index].GetComponent<BoxCollider>().size.y;
 
+                // Spawn stack of certain number correlating to each case number
                 switch (stackCount)
                 {
                     case 1:
