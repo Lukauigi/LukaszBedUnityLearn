@@ -683,7 +683,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpForce: 570
   _gravityModifier: 1.5
-  _isGrounded: 1
   _gameOver: 0
   _jumpSound: {fileID: 8300000, guid: 0f7d0b7c3397f4dac91f20e8a77d2d57, type: 3}
   _crashSound: {fileID: 8300000, guid: 4bcde6de2166e41e284ec46d8a01fb90, type: 3}

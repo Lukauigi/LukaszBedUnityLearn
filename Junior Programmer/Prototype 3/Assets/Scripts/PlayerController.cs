@@ -10,15 +10,25 @@ using UnityEngine;
 /// </remarks>
 public class PlayerController : MonoBehaviour
 {
+    private static int MaxJumps = 2;
+    private static int MidairJumpThreshold = 1;
+
     // Attributes
     [SerializeField, Tooltip("The force which propels the player into a jump.")]
     private float _jumpForce;
     [SerializeField, Tooltip("The gravity rate of the player.")]
     private float _gravityModifier;
-    [SerializeField, Tooltip("Indicator of whether the character is on the ground. For debugging only.")]
-    private bool _isGrounded = true;
+
+    private float _midairJumpModifier = 0.85f;
+    private int _jumps;
+
+
+    // Flags
+    //[SerializeField, Tooltip("Indicator of whether the character is on the ground. For debugging only.")]
+    //private bool _isGrounded = true;
     [SerializeField, Tooltip("Indicator of the game over state. For debugging only.")]
     private bool _gameOver = false;
+    private bool _midairJump = false;
 
     // Sound Effects
     [SerializeField, Tooltip("The character's jump sound effect.")]
@@ -44,6 +54,7 @@ public class PlayerController : MonoBehaviour
         _playerRb = GetComponent<Rigidbody>();
         _playerAnim = GetComponent<Animator>();
         _playerAudio = GetComponent<AudioSource>();
+        _jumps = MaxJumps;
 
         Physics.gravity *= _gravityModifier; // Modifies the rate of the player's gravity.
     }
@@ -51,27 +62,42 @@ public class PlayerController : MonoBehaviour
     ///<inheritdoc />
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded && !_gameOver)
+        if (Input.GetKeyDown(KeyCode.Space) && _jumps != 0 && !_gameOver)
         {
-            _playerRb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse); //use impulse ForceMode to simulate an object suddenly receiving a push.
-            _isGrounded = false;
-            _playerAnim.SetTrigger("Jump_trig");
+            //_isGrounded = false;
+            --_jumps;
+            if (_jumps < MidairJumpThreshold) _midairJump = true;
+
+            float jumpModifier = DetermineJumpForce();
+            _playerRb.AddForce(Vector3.up * jumpModifier, ForceMode.Impulse); //use impulse ForceMode to simulate an object suddenly receiving a push.
+
+            
+            if (_midairJump) _playerAnim.Play("Running_Jump", 3, 0f);
+            else _playerAnim.SetTrigger("Jump_trig");
+
             _runningDirtParticle.Stop();
             _playerAudio.PlayOneShot(_jumpSound);
         }
+
+
     }
 
+    ///<inheritdoc />
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            _isGrounded = true;
+            //_isGrounded = true;
+            _jumps = MaxJumps;
+            _midairJump = false;
+
             _runningDirtParticle.Play();
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
             _playerAnim.SetBool("Death_b", true);
             _playerAnim.SetInteger("DeathType_int", 1); //Set to use the first type of death anim
+
             _explosionParticle.Play();
             _runningDirtParticle.Stop();
             _playerAudio.PlayOneShot(_crashSound);
@@ -79,5 +105,15 @@ public class PlayerController : MonoBehaviour
             _gameOver = true;
             Debug.Log("Game Over");
         }
+    }
+
+    /// <summary>
+    /// Determines the appropriate jump force.
+    /// </summary>
+    /// <returns>The appropriate jump force.</returns>
+    private float DetermineJumpForce()
+    {
+        if (!_midairJump) return _jumpForce;
+        else return _jumpForce * _midairJumpModifier;
     }
 }
