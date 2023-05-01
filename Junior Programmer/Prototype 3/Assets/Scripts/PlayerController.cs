@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
     ///<inheritdoc />
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") && !_gameOver)
         {
             //_isGrounded = true;
             _jumps = MaxJumps;
