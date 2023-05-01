@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("The gravity rate of the player.")]
     private float _gravityModifier;
 
-    private float _midairJumpModifier = 0.85f;
+    [SerializeField, Tooltip("The rate of jump force for a midair jump."), Range(0.1f, 2)]
+    private float _midairJumpModifier;
     private int _jumps;
 
 
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
             //_isGrounded = false;
             --_jumps;
             if (_jumps < MidairJumpThreshold) _midairJump = true;
+            if (_midairJump) _playerRb.velocity = new Vector3(0, 0, 0);
 
             float jumpModifier = DetermineJumpForce();
             _playerRb.AddForce(Vector3.up * jumpModifier, ForceMode.Impulse); //use impulse ForceMode to simulate an object suddenly receiving a push.
