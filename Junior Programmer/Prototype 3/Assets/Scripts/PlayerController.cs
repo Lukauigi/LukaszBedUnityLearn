@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 {
     private static int MaxJumps = 2;
     private static int MidairJumpThreshold = 1;
+    private static float DefaultAnimSpeed = 1;
+    private static float DashAnimSpeed = 2.5f;
 
     // Attributes
     [SerializeField, Tooltip("The force which propels the player into a jump.")]
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Indicator of the game over state. For debugging only.")]
     private bool _gameOver = false;
     private bool _midairJump = false;
+    private bool _isDashing = false;
 
     // Sound Effects
     [SerializeField, Tooltip("The character's jump sound effect.")]
@@ -79,7 +82,21 @@ public class PlayerController : MonoBehaviour
             _playerAudio.PlayOneShot(_jumpSound);
         }
 
+        if (Input.GetKey(KeyCode.W) && !_isDashing)
+        {
+            _isDashing = true;
+            _playerAnim.SetFloat("Speed_Multiplier_f", DashAnimSpeed);
+            // increase score gain rate
+            // access bg and increase speed in move left script
+        }
 
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            _isDashing = false;
+            _playerAnim.SetFloat("Speed_Multiplier_f", DefaultAnimSpeed);
+            // reduce score gain rate
+            // access bg and slow down speed in move left script
+        }
     }
 
     ///<inheritdoc />
