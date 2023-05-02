@@ -12,9 +12,14 @@ using UnityEngine;
 /// </remarks>
 public class MoveLeft : MonoBehaviour
 {
-    [SerializeField, Tooltip("Speed in which this object moves globally left.")]
-    private float _speed = 15;
+    public static float MinSpeed = 0;
+    public static float DashingWorldSpeedModifier = 2;
 
+    [SerializeField, Tooltip("The default speed in which this object moves globally left.")]
+    private float _defaultSpeed = 15f;
+    private float _dashScrollSpeed;
+    [SerializeField]
+    private float _speed;
     private float _destroyBound = -15;
 
     // Refs to other component(s)
@@ -23,6 +28,9 @@ public class MoveLeft : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _speed = _defaultSpeed;
+        _dashScrollSpeed = _speed * DashingWorldSpeedModifier;
+
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
@@ -31,6 +39,16 @@ public class MoveLeft : MonoBehaviour
     {
         if (_playerController.GameOver == false)
         {
+            if (_playerController.IsDashing)
+            {
+                _speed = _dashScrollSpeed;
+            }
+
+            else
+            {
+                _speed = _defaultSpeed;
+            }
+
             transform.Translate(Vector3.left * Time.deltaTime * _speed);
         }
 

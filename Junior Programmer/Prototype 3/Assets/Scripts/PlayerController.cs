@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Reference to child running dirt particle effect.")]
     private ParticleSystem _runningDirtParticle;
 
+    // Public Field(s)
+    public bool IsDashing { get { return _isDashing; } }
+
     ///<inheritdoc />
     private void Start()
     {
@@ -88,16 +91,12 @@ public class PlayerController : MonoBehaviour
         {
             _isDashing = true;
             _playerAnim.SetFloat("Speed_Multiplier_f", DashAnimSpeed);
-            // increase score gain rate
-            // access bg and increase speed in move left script
         }
 
         if (Input.GetKeyUp(KeyCode.W))
         {
             _isDashing = false;
             _playerAnim.SetFloat("Speed_Multiplier_f", DefaultAnimSpeed);
-            // reduce score gain rate
-            // access bg and slow down speed in move left script
         }
     }
 
