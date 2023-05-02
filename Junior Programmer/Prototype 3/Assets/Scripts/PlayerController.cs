@@ -61,8 +61,8 @@ public class PlayerController : MonoBehaviour
         _playerRb = GetComponent<Rigidbody>();
         _playerAnim = GetComponent<Animator>();
         _playerAudio = GetComponent<AudioSource>();
-        _jumps = MaxJumps;
 
+        _jumps = MaxJumps;
         Physics.gravity *= _gravityModifier; // Modifies the rate of the player's gravity.
     }
 
