@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 /// <summary>
 /// Controller of the game world.
@@ -21,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     // Ref(s) to other GameObject components
     private PlayerController _playerController;
+    private MoveLeft _backgroundMovement;
     [SerializeField, Tooltip("Spot player stops and end of cutscene to begin gameplay.")]
     private Transform _cutsceneEndPos;
 
@@ -28,9 +28,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        //_cutsceneEndPos = GameObject.Find("OpeningEndPos").GetComponent<Transform>();
+        _backgroundMovement = GameObject.FindGameObjectWithTag("Background").GetComponent<MoveLeft>();
         _score = 0;
 
+        _backgroundMovement.enabled = false;
         StartCoroutine(OpeningCutscene());
     }
 
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
         float fractionOfMovement = distanceCovered / movementLength;
 
         Animator playerAnim = _playerController.GetComponent<Animator>();
-        playerAnim.SetFloat("Speed_Multiplier_f", 0.5f);
+        playerAnim.SetFloat("Speed_Multiplier_f", 0.6f);
 
         while (fractionOfMovement < 1)
         {
@@ -78,5 +79,6 @@ public class GameManager : MonoBehaviour
 
         playerAnim.SetFloat("Speed_Multiplier_f", 1f);
         _playerController.IsOperable = true;
+        _backgroundMovement.enabled = true;
     }
 }
