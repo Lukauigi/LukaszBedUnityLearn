@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 891438455}
   - component: {fileID: 891438454}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: HowToPlayUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1090,7 +1090,7 @@ GameObject:
   - component: {fileID: 1729055872}
   - component: {fileID: 1729055871}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Controls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1165,8 +1165,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
