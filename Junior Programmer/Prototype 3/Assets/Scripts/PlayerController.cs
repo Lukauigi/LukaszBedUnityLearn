@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private bool _gameOver = false;
     private bool _midairJump = false;
     private bool _isDashing = false;
+    private bool _isOperable = false;
 
     // Sound Effects
     [SerializeField, Tooltip("The character's jump sound effect.")]
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     // Public Field(s)
     public bool IsDashing { get { return _isDashing; } }
+    public bool IsOperable { get { return _isOperable; } set { _isOperable = value; } }
 
     ///<inheritdoc />
     private void Start()
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
     ///<inheritdoc />
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _jumps != 0 && !_gameOver)
+        if (Input.GetKeyDown(KeyCode.Space) && _jumps != 0 && !_gameOver && _isOperable)
         {
             //_isGrounded = false;
             --_jumps;
@@ -103,7 +105,7 @@ public class PlayerController : MonoBehaviour
     ///<inheritdoc />
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && !_gameOver)
+        if (collision.gameObject.CompareTag("Ground") && !_gameOver && _isOperable)
         {
             //_isGrounded = true;
             _jumps = MaxJumps;
