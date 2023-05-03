@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         float fractionOfMovement = distanceCovered / movementLength;
 
         Animator playerAnim = _playerController.GetComponent<Animator>();
-        playerAnim.SetFloat("Speed_Multiplier", 0.5f);
+        playerAnim.SetFloat("Speed_Multiplier_f", 0.5f);
 
         while (fractionOfMovement < 1)
         {
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        playerAnim.SetFloat("Speed_Multiplier", 1f);
+        playerAnim.SetFloat("Speed_Multiplier_f", 1f);
         _playerController.IsOperable = true;
     }
 }
