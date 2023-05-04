@@ -190,6 +190,7 @@ Learn about fundamental programming concepts such as variables, functions and ba
     * Hold Alt while holding LMB to navigate easily
     * How to edit parameters in script (SetBool, SetTrigger, SetInteger)
     * RMB on a state block to set as default layer to be the initial state
+    * Added a parameter "Speed_Multiplier_f" which is a parameter on other variables to change speed of multiple other variables (GoTo Animator => click a state => under multipliers: check a parameter box & specify parameter.)
 * Utlize Audio
     * Play & stop audio
     * Play audio on loop
@@ -198,3 +199,7 @@ Learn about fundamental programming concepts such as variables, functions and ba
     * Play and stop effects in scene window
     * Edit paramters in editor
     * Play & stop particle effects
+* Learned basics of Linear interpolation b/w 2 points w/ Vector3.Lerp()
+* Experimented with Scriptable Objects as data containers
+
+##### Unit 4: Gameplay Mechanics
