@@ -15,7 +15,7 @@ using UnityEngine;
 public class RotateCamera : MonoBehaviour
 {
     [SerializeField, Tooltip("The speed in which the camera rotates around the stage.")]
-    private float _rotationSpeed;
+    private float _rotationSpeed = 150f;
 
     // Start is called before the first frame update
     void Start()
