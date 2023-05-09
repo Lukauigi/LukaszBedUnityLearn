@@ -36,6 +36,6 @@ public class PlayerController : MonoBehaviour
     {
         float forwardInput = Input.GetAxis("Vertical");
         // Use the focal point's local forward direction
-        _playerRb.AddForce(_focalPoint.transform.forward * _speed * forwardInput);
+        _playerRb.AddForce(_speed * forwardInput * _focalPoint.transform.forward);
     }
 }
