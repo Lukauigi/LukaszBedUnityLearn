@@ -207,3 +207,5 @@ Learn about fundamental programming concepts such as variables, functions and ba
 * Global & local coordinates
 * Get forward direction of another object
    * Tie player input into focal point's local forward direction
+* Normalizing values
+   * Normalize the distance b/w enemy & player to have enemy move at a constant speed (speed does not flucuate based on distance) 
