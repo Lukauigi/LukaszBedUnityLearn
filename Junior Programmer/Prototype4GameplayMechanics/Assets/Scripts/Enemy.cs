@@ -35,6 +35,8 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // normalized to not have the movement over greater distances faster
-        _enemyRb.AddForce((_player.transform.position - transform.position).normalized * _speed);
+        Vector3 lookDirection = (_player.transform.position - transform.position).normalized;
+
+        _enemyRb.AddForce(lookDirection * _speed);
     }
 }
