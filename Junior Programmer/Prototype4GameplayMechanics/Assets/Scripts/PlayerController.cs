@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     // Attributes
     [SerializeField, Tooltip("The movement speed of the player.")]
     private float _speed = 5f;
+    private bool _hasPowerup = false;
 
     // Ref(s) to attached component(s)
     private Rigidbody _playerRb;
@@ -37,5 +38,15 @@ public class PlayerController : MonoBehaviour
         float forwardInput = Input.GetAxis("Vertical");
         // Use the focal point's local forward direction
         _playerRb.AddForce(_speed * forwardInput * _focalPoint.transform.forward);
+    }
+
+    /// <inheritdoc />
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Powerup"))
+        {
+            _hasPowerup = true;
+            Destroy(other.gameObject);
+        }
     }
 }
