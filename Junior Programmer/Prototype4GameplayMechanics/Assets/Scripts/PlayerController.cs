@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     // Attributes
     [SerializeField, Tooltip("The movement speed of the player.")]
     private float _speed = 5f;
+    private float _powerupStrength = 15f;
     private bool _hasPowerup = false;
 
     // Ref(s) to attached component(s)
@@ -47,6 +48,21 @@ public class PlayerController : MonoBehaviour
         {
             _hasPowerup = true;
             Destroy(other.gameObject);
+        }
+    }
+
+    /// <inheritdoc />
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && _hasPowerup)
+        {
+            Rigidbody enemyRb = collision.gameObject.GetComponent<Rigidbody>();
+            // Gets direction away from the player
+            Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
+            
+            print("Collided with " + collision.gameObject.name + 
+                " with powerup set to " + _hasPowerup);
+            enemyRb.AddForce(awayFromPlayer * _powerupStrength, ForceMode.Impulse);
         }
     }
 }
