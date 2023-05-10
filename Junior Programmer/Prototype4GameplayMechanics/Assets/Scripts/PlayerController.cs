@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
         {
             _hasPowerup = true;
             Destroy(other.gameObject);
+            StartCoroutine(PowerupCountdownRoutine());
         }
     }
 
@@ -64,5 +65,15 @@ public class PlayerController : MonoBehaviour
                 " with powerup set to " + _hasPowerup);
             enemyRb.AddForce(awayFromPlayer * _powerupStrength, ForceMode.Impulse);
         }
+    }
+
+    /// <summary>
+    /// Waits for the powerup to expire.
+    /// </summary>
+    /// <returns>A second, waiting for the powerup cooldown countdown.</returns>
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7);
+        _hasPowerup = false;
     }
 }
