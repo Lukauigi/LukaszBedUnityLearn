@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     // Ref(s) to other GameObject(s)
     private GameObject _focalPoint;
+    [SerializeField, Tooltip("Reference to visual indication of an active powerup.")]
+    private GameObject _powerupIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,8 @@ public class PlayerController : MonoBehaviour
         float forwardInput = Input.GetAxis("Vertical");
         // Use the focal point's local forward direction
         _playerRb.AddForce(_speed * forwardInput * _focalPoint.transform.forward);
+
+        _powerupIndicator.transform.position = transform.position + new Vector3(0, -0.55f, 0);
     }
 
     /// <inheritdoc />
@@ -49,6 +53,7 @@ public class PlayerController : MonoBehaviour
             _hasPowerup = true;
             Destroy(other.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
+            _powerupIndicator.SetActive(true);
         }
     }
 
@@ -75,5 +80,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(7);
         _hasPowerup = false;
+        _powerupIndicator.SetActive(false);
     }
 }
