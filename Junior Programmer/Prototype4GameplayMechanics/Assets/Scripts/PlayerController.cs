@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     // Attributes
     [SerializeField, Tooltip("The movement speed of the player.")]
     private float _speed = 5f;
+    [SerializeField, Tooltip("The duration of powerups."), Range(0f, 15f)]
+    private float _powerupDuration = 7f;
     private float _powerupStrength = 15f;
     private bool _hasPowerup = false;
 
@@ -78,7 +80,7 @@ public class PlayerController : MonoBehaviour
     /// <returns>A second, waiting for the powerup cooldown countdown.</returns>
     IEnumerator PowerupCountdownRoutine()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(_powerupDuration);
         _hasPowerup = false;
         _powerupIndicator.SetActive(false);
     }
