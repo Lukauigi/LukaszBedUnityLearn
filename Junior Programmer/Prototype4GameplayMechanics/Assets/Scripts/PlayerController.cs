@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private float _speed = 5f;
     [SerializeField, Tooltip("The duration of powerups."), Range(0f, 15f)]
     private float _powerupDuration = 7f;
+    [SerializeField, Tooltip("The knockback strength of powerups."), Range(0f, 25f)]
     private float _powerupStrength = 15f;
     private bool _hasPowerup = false;
 
