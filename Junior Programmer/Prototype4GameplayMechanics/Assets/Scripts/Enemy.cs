@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     // Attributes
     [SerializeField, Tooltip("The movement speed.")]
     private float _speed = 2.5f;
+    private float _yDestroyThreshold = -10f;
 
     // Ref(s) to attached component(s)
     private Rigidbody _enemyRb;
@@ -38,5 +39,10 @@ public class Enemy : MonoBehaviour
         Vector3 lookDirection = (_player.transform.position - transform.position).normalized;
 
         _enemyRb.AddForce(lookDirection * _speed);
+
+        if (transform.position.y < _yDestroyThreshold)
+        {
+            Destroy(gameObject);
+        }
     }
 }
