@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnManagerX : MonoBehaviour
 {
+    public static float EnemyDifficultySpeedScaler = 0.1f;
+
     public GameObject enemyPrefab;
     public GameObject powerupPrefab;
 
@@ -13,6 +15,7 @@ public class SpawnManagerX : MonoBehaviour
 
     public int enemyCount;
     public int waveCount = 1;
+    private float _enemyDifficultySpeedRate = 1.0f;
 
 
     public GameObject player; 
@@ -56,7 +59,7 @@ public class SpawnManagerX : MonoBehaviour
 
         waveCount++;
         ResetPlayerPosition(); // put player back at start
-
+        IncreaseEnemyDifficulty();
     }
 
     // Move player back to position in front of own goal
@@ -68,4 +71,29 @@ public class SpawnManagerX : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Increases the enemy difficulty by increasing their movement speed.
+    /// </summary>
+    /// 
+    /// <remarks>
+    /// <para>
+    /// Author: Lukasz Bednarek
+    /// Date: 2023-05-11
+    /// </para>
+    /// </remarks>
+    private void IncreaseEnemyDifficulty()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        float lastWaveSpeed = enemies[0].GetComponent<EnemyX>().speed;
+        float newSpeed = lastWaveSpeed * _enemyDifficultySpeedRate;
+
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<EnemyX>().speed = newSpeed;
+        }
+
+        // Increases speed after a wave for the next wave
+        _enemyDifficultySpeedRate += EnemyDifficultySpeedScaler;
+    }
 }
