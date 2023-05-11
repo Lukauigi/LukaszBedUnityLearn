@@ -452,6 +452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _powerupDuration: 7
+  _powerupStrength: 15
   _powerupIndicator: {fileID: 218573304}
 --- !u!1 &1211016355
 GameObject:
