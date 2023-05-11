@@ -14,6 +14,13 @@ public class PlayerControllerX : MonoBehaviour
 
     private float normalStrength = 10; // how hard to hit enemy without powerup
     private float powerupStrength = 25; // how hard to hit enemy with powerup
+
+    [SerializeField, Tooltip("Reference to smoke particle.")]
+    private ParticleSystem _smokeParticleBoost;
+    [SerializeField, Tooltip("The speed to propell player when initiating turbo boost.")]
+    private float _turboBoostSpeed = 1_800f;
+    private float _turboBoostCooldown = 4f;
+    private bool _canTurboBoost = true;
     
     void Start()
     {
@@ -30,6 +37,14 @@ public class PlayerControllerX : MonoBehaviour
         // Set powerup indicator position to beneath player
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.6f, 0);
 
+        // Turbo boost ability
+        if (Input.GetKeyDown(KeyCode.Space) && _canTurboBoost)
+        {
+            StartCoroutine(TurboBoostCooldown());
+            _smokeParticleBoost.transform.position = transform.position;
+            _smokeParticleBoost.Play();
+            playerRb.AddForce(_turboBoostSpeed * Time.deltaTime * focalPoint.transform.forward, ForceMode.Impulse);
+        }
     }
 
     // If Player collides with powerup, activate powerup
@@ -50,6 +65,25 @@ public class PlayerControllerX : MonoBehaviour
         yield return new WaitForSeconds(powerUpDuration);
         hasPowerup = false;
         powerupIndicator.SetActive(false);
+    }
+
+    /// <summary>
+    /// Counts down until turbo boost can be used again.
+    /// </summary>
+    /// 
+    /// <remarks>
+    /// <para>
+    /// Author: Lukasz Bednarek
+    /// Date: 2023-05-11
+    /// </para>
+    /// </remarks>
+    /// 
+    /// <returns>The next second unitl its zero.</returns>
+    private IEnumerator TurboBoostCooldown()
+    {
+        _canTurboBoost = false;
+        yield return new WaitForSeconds(_turboBoostCooldown);
+        _canTurboBoost = true;
     }
 
     // If Player collides with enemy
