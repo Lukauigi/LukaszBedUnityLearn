@@ -23,15 +23,18 @@ public class SpawnManager : MonoBehaviour
     private int _waveCount;
 
     // Ref(s) to other GameObject(s)
-    [SerializeField, Tooltip("An prefab game object representing an enemy.")]
+    [SerializeField, Tooltip("A prefab game object representing an enemy.")]
     private GameObject _enemyPrefab;
+    [SerializeField, Tooltip("A prefab game object representing a powerup.")]
+    private GameObject _powerupPrefab;
 
-    // Start is called before the first frame update
+    /// <inheritdoc />
     void Start()
     {
         _waveCount = 1;
         _enemySpawnCount = 3;
         SpawnEnemyWave(_enemySpawnCount);
+        Instantiate(_powerupPrefab, GenerateSpawnPosition(), _powerupPrefab.transform.rotation);
     }
 
     /// <inheritdoc />
@@ -40,6 +43,7 @@ public class SpawnManager : MonoBehaviour
         _currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (_currentEnemyCount == 0)
         {
+            Instantiate(_powerupPrefab, GenerateSpawnPosition(), _powerupPrefab.transform.rotation);
             _enemySpawnCount = _waveCount;
             SpawnEnemyWave(_waveCount);
             _waveCount++;
