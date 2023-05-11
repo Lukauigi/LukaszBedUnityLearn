@@ -14,8 +14,13 @@ using UnityEngine;
 /// </remarks>
 public class SpawnManager : MonoBehaviour
 {
+    public static int EnemyStartSpawnCount = 3;
+
     // Attribute(s)
-    private float _spawnRange = 9;
+    private float _spawnRange = 9f;
+    private int _enemySpawnCount;
+    private int _currentEnemyCount;
+    private int _waveCount;
 
     // Ref(s) to other GameObject(s)
     [SerializeField, Tooltip("An prefab game object representing an enemy.")]
@@ -24,7 +29,21 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnWave(3);
+        _waveCount = 1;
+        _enemySpawnCount = 3;
+        SpawnEnemyWave(_enemySpawnCount);
+    }
+
+    /// <inheritdoc />
+    private void Update()
+    {
+        _currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        if (_currentEnemyCount == 0)
+        {
+            _enemySpawnCount = _waveCount;
+            SpawnEnemyWave(_waveCount);
+            _waveCount++;
+        }
     }
 
     /// <summary>
@@ -43,7 +62,7 @@ public class SpawnManager : MonoBehaviour
     /// Spawns a wave of enemies.
     /// </summary>
     /// <param name="enemyCount">A positive non-zero integer count of enemies to spawn.</param>
-    private void SpawnWave(int enemyCount)
+    private void SpawnEnemyWave(int enemyCount)
     {
         for (int i = 0; i < enemyCount; i++)
         {
