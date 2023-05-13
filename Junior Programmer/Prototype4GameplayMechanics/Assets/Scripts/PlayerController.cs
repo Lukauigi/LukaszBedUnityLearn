@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("The knockback strength of powerups."), Range(0f, 25f)]
     private float _powerupStrength = 15f;
     private bool _hasPowerup = false;
+    private Coroutine _powerupActiveCoroutine = null;
 
     // Ref(s) to attached component(s)
     private Rigidbody _playerRb;
@@ -53,9 +54,14 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Powerup"))
         {
+            if (_hasPowerup)
+            {
+                StopCoroutine(_powerupActiveCoroutine);
+            }
+
             _hasPowerup = true;
             Destroy(other.gameObject);
-            StartCoroutine(PowerupCountdownRoutine());
+            _powerupActiveCoroutine = StartCoroutine(PowerupCountdownRoutine());
             _powerupIndicator.SetActive(true);
         }
     }
@@ -79,7 +85,7 @@ public class PlayerController : MonoBehaviour
     /// Waits for the powerup to expire.
     /// </summary>
     /// <returns>A second, waiting for the powerup cooldown countdown.</returns>
-    IEnumerator PowerupCountdownRoutine()
+    private IEnumerator PowerupCountdownRoutine()
     {
         yield return new WaitForSeconds(_powerupDuration);
         _hasPowerup = false;
