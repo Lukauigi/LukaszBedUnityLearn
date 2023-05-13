@@ -753,7 +753,9 @@ MonoBehaviour:
   _enemyPrefabs:
   - {fileID: 2008604957511107608, guid: 441fa1d47a8ba0147af13ac263c87020, type: 3}
   - {fileID: 3648060861065570467, guid: d710cc89dbe1d164192734eb183dc4bc, type: 3}
-  _powerupPrefab: {fileID: 5495496338894878345, guid: ad702c1663c66a8438a1e62c3a221676, type: 3}
+  _powerupPrefabs:
+  - {fileID: 5495496338894878345, guid: ad702c1663c66a8438a1e62c3a221676, type: 3}
+  - {fileID: 2746938804534679064, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
 --- !u!4 &1624083105
 Transform:
   m_ObjectHideFlags: 0

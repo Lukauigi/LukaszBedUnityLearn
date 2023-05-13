@@ -14,9 +14,9 @@ using UnityEngine;
 /// </remarks>
 public class SpawnManager : MonoBehaviour
 {
-    public static int EnemyStartSpawnCount = 3;
-    public static (int, int) RandomRange = (0, 100);
-    public static int HardEnemySpawnChance = 20;
+    public static (float, float) RandomRange = (0f, 100f);
+    public static float HardEnemySpawnChance = 20f;
+    public static float MissilePowerupSpawnChance = 15f;
 
     // Attribute(s)
     private float _spawnRange = 9f;
@@ -27,8 +27,8 @@ public class SpawnManager : MonoBehaviour
     // Ref(s) to other GameObject(s)
     [SerializeField, Tooltip("A list of prefab game objects representing an enemies.")]
     private GameObject[] _enemyPrefabs;
-    [SerializeField, Tooltip("A prefab game object representing a powerup.")]
-    private GameObject _powerupPrefab;
+    [SerializeField, Tooltip("A list of prefab game objects representing a powerup.")]
+    private GameObject[] _powerupPrefabs;
 
     /// <inheritdoc />
     void Start()
@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour
         _currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (_currentEnemyCount == 0)
         {
-            Instantiate(_powerupPrefab, GenerateSpawnPosition(), _powerupPrefab.transform.rotation);
+            SpawnPowerup();
             ++_waveCount;
             _enemySpawnCount = _waveCount;
             SpawnEnemyWave(_enemySpawnCount);
@@ -70,7 +70,7 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < enemyCount; i++)
         {
-            int enemyTypeChance = Random.Range(RandomRange.Item1, RandomRange.Item2 + 1);
+            float enemyTypeChance = Random.Range(RandomRange.Item1, RandomRange.Item2);
             
             if (enemyTypeChance <= HardEnemySpawnChance)
             {
@@ -80,6 +80,24 @@ public class SpawnManager : MonoBehaviour
             {
                 Instantiate(_enemyPrefabs[0], GenerateSpawnPosition(), _enemyPrefabs[0].transform.rotation);
             }
+        }
+    }
+
+    /// <summary>
+    /// Spawns a powerup on the stage.
+    /// </summary>
+    private void SpawnPowerup()
+    {
+        float powerupChance = Random.Range(RandomRange.Item1, RandomRange.Item2);
+        if (powerupChance <= MissilePowerupSpawnChance)
+        {
+            Instantiate(_powerupPrefabs[1], GenerateSpawnPosition(), 
+                _powerupPrefabs[1].transform.rotation);
+        }
+        else
+        {
+            Instantiate(_powerupPrefabs[0], GenerateSpawnPosition(), 
+                _powerupPrefabs[0].transform.rotation);
         }
     }
 }
