@@ -14,6 +14,8 @@ using UnityEngine;
 /// </remarks>
 public class PlayerController : MonoBehaviour
 {
+    private static Vector3 PowerupIndicatorOffset = new Vector3(0, -0.55f, 0);
+
     // Attributes
     [SerializeField, Tooltip("The movement speed of the player.")]
     private float _speed = 5f;
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
         // Use the focal point's local forward direction
         _playerRb.AddForce(_speed * forwardInput * _focalPoint.transform.forward);
 
-        _powerupIndicator.transform.position = transform.position + new Vector3(0, -0.55f, 0);
+        _powerupIndicator.transform.position = transform.position + PowerupIndicatorOffset;
     }
 
     /// <inheritdoc />
