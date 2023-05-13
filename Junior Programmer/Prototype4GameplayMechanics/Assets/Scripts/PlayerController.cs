@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("The knockback strength of powerups."), Range(0f, 25f)]
     private float _powerupStrength = 15f;
     private bool _hasPowerup = false;
+    // https://answers.unity.com/questions/1029332/restart-a-coroutine.html
     private Coroutine _powerupActiveCoroutine = null;
 
     // Ref(s) to attached component(s)
