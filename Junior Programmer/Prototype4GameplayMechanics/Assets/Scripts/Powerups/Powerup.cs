@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A powerup collectible.
+/// </summary>
+/// 
+/// <remarks>
+/// <para>
+/// Author: Lukasz Bednarek
+/// Date: 2023-05-12
+/// </para>
+/// </remarks>
 public class Powerup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField, Tooltip("Reference to powerup.")]
+    private PowerupScriptableObject _powerup;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// The name of the powerup.
+    /// </summary>
+    public string Name { get { return _powerup.name; } }
 }

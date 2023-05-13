@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2746938804537902778}
   - component: {fileID: 2746938804536824628}
   - component: {fileID: 9006723507309271326}
+  - component: {fileID: -5460701265439629467}
   m_Layer: 0
   m_Name: Missile Powerup
   m_TagString: Powerup
@@ -97,3 +98,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.891613, y: 1.3382554, z: 0.20007595}
   m_Center: {x: -0.0000018924475, y: 0, z: 0.000000011175871}
+--- !u!114 &-5460701265439629467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2746938804534679064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d67b526fd06f94bab4b7442b3b5446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powerup: {fileID: 11400000, guid: dd64bc0c6954d3146981aec5942ead00, type: 2}
