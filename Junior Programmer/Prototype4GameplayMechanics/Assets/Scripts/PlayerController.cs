@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+using System;
 
 /// <summary>
 /// Controller of player interactions.
@@ -20,11 +20,7 @@ public class PlayerController : MonoBehaviour
     // Attributes
     [SerializeField, Tooltip("The movement speed of the player.")]
     private float _speed = 5f;
-    [SerializeField, Tooltip("The duration of powerups."), Range(0f, 15f)]
-    private float _powerupDuration = 7f;
-    [SerializeField, Tooltip("The knockback strength of powerups."), Range(0f, 25f)]
-    private float _powerupStrength = 15f;
-    private bool _hasPowerup = false;
+    private PowerupScriptableObject _currentPowerup;
     // https://answers.unity.com/questions/1029332/restart-a-coroutine.html
     private Coroutine _powerupActiveCoroutine = null;
 
@@ -35,6 +31,9 @@ public class PlayerController : MonoBehaviour
     private GameObject _focalPoint;
     [SerializeField, Tooltip("Reference to visual indication of an active powerup.")]
     private GameObject _powerupIndicator;
+
+    // Field(s)
+    public PowerupScriptableObject CurrentPowerup { get { return _currentPowerup; } }
 
     // Start is called before the first frame update
     void Start()
@@ -58,32 +57,22 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Powerup"))
         {
-            if (_hasPowerup)
+            if (_currentPowerup)
             {
                 StopCoroutine(_powerupActiveCoroutine);
+                Destroy(GetComponent(Type.GetType(_currentPowerup.Name)));
             }
+            
+            _currentPowerup = other.GetComponent<Powerup>().PowerupType;
+            gameObject.AddComponent(Type.GetType(_currentPowerup.Name));
 
-            _hasPowerup = true;
             Destroy(other.gameObject);
             _powerupActiveCoroutine = StartCoroutine(PowerupCountdownRoutine());
             _powerupIndicator.SetActive(true);
         }
     }
 
-    /// <inheritdoc />
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy") && _hasPowerup)
-        {
-            Rigidbody enemyRb = collision.gameObject.GetComponent<Rigidbody>();
-            // Gets direction away from the player
-            Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
-            
-            print("Collided with " + collision.gameObject.name + 
-                " with powerup set to " + _hasPowerup);
-            enemyRb.AddForce(awayFromPlayer * _powerupStrength, ForceMode.Impulse);
-        }
-    }
+    
 
     /// <summary>
     /// Waits for the powerup to expire.
@@ -91,8 +80,9 @@ public class PlayerController : MonoBehaviour
     /// <returns>A second, waiting for the powerup cooldown countdown.</returns>
     private IEnumerator PowerupCountdownRoutine()
     {
-        yield return new WaitForSeconds(_powerupDuration);
-        _hasPowerup = false;
+        yield return new WaitForSeconds(_currentPowerup.Duration);
+        Destroy(GetComponent(Type.GetType(_currentPowerup.Name)));
+        _currentPowerup = null;
         _powerupIndicator.SetActive(false);
     }
 }

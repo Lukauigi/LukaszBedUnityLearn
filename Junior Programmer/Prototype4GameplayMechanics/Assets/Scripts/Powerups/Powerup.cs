@@ -19,4 +19,5 @@ public class Powerup : MonoBehaviour
     /// The name of the powerup.
     /// </summary>
     public string Name { get { return _powerup.name; } }
+    public PowerupScriptableObject PowerupType { get { return _powerup; } }
 }
