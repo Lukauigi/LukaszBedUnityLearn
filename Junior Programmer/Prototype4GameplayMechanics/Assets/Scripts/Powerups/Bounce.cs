@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controller of the bounce powerup behaviour.
+/// </summary>
+/// 
+/// <remarks>
+/// <para>
+/// Author: Lukasz Bednarek
+/// Date: 2023-05-13
+/// </para>
+/// </remarks>
 [RequireComponent(typeof(PlayerController))]
 public class Bounce : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /// <inheritdoc />
     private void OnCollisionEnter(Collision collision)
     {
