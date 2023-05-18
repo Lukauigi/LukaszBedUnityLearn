@@ -14,8 +14,16 @@ using UnityEngine;
 /// </remarks>
 public class MissileProjectile : MonoBehaviour
 {
-    [SerializeField, Tooltip("Speed in the missile moves."), Range(1f, 15f)]
+    [SerializeField, Tooltip("The movement rate of the missile's position."), Range(1f, 15f)]
     private float _speed = 6f;
+    private float _knockback;
+
+    /// <inheritdoc />
+    private void Start()
+    {
+        _knockback =
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().CurrentPowerup.Knockback;
+    }
 
     /// <inheritdoc />
     void Update()
@@ -50,4 +58,29 @@ public class MissileProjectile : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(newDirection);
         */
     }
+
+    /// <inheritdoc />
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            ApplyKnockback(other.attachedRigidbody);
+            Destroy(gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Pushes the other GameObject away from the missile.
+    /// </summary>
+    /// <param name="otherRb">The rigidbody to push away.</param>
+    private void ApplyKnockback(Rigidbody otherRb)
+    {
+        // Gets direction away from the player
+        Vector3 awayFromMissile = (otherRb.transform.position - transform.position);
+
+        otherRb.AddForce(awayFromMissile *
+            _knockback,
+            ForceMode.Impulse);
+    }
+    
 }
