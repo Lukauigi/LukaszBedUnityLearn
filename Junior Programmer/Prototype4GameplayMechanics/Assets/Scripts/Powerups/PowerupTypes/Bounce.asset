@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Bounce
   m_EditorClassIdentifier: 
   _name: Bounce
+  _duration: 9
+  _knockback: 15

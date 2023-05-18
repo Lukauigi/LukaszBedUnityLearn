@@ -72,8 +72,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
-
     /// <summary>
     /// Waits for the powerup to expire.
     /// </summary>

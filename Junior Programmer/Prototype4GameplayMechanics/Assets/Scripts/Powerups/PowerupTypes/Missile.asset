@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Missile
   m_EditorClassIdentifier: 
   _name: Missile
+  _duration: 7
+  _knockback: 23

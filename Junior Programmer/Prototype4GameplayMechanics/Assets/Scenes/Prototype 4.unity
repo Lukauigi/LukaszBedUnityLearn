@@ -452,9 +452,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
-  _powerupDuration: 7
-  _powerupStrength: 15
   _powerupIndicator: {fileID: 218573304}
+--- !u!1001 &673629035
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534379320, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534679064, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_Name
+      value: Missile Powerup
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
 --- !u!1 &1211016355
 GameObject:
   m_ObjectHideFlags: 0
