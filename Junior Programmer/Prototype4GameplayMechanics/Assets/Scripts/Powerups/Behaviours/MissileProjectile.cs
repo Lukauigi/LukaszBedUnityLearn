@@ -11,6 +11,13 @@ using UnityEngine;
 /// Author: Lukasz Bednarek
 /// Date: 2023-05-18
 /// </para>
+/// <para>
+/// Source(s): 
+/// <list type="bullet">
+///     <item>https://docs.unity3d.com/ScriptReference/Vector3.MoveTowards.html</item>
+///     <item>https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html</item>
+/// </list>
+/// </para>
 /// </remarks>
 public class MissileProjectile : MonoBehaviour
 {
@@ -50,13 +57,12 @@ public class MissileProjectile : MonoBehaviour
         float step = _speed * Time.deltaTime; // calc distance to move
         Transform homeTarget = closestEnemy.transform;
         transform.position = Vector3.MoveTowards(transform.position, homeTarget.position, step);
+        transform.position = new Vector3(transform.position.x, Missile.YPositionOffset, transform.position.z);
 
         //rotate missile towards other object
-        /*
         Vector3 homeTargetDirection = homeTarget.position - transform.position;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, homeTargetDirection, step, 0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
-        */
     }
 
     /// <inheritdoc />
@@ -78,8 +84,7 @@ public class MissileProjectile : MonoBehaviour
         // Gets direction away from the player
         Vector3 awayFromMissile = (otherRb.transform.position - transform.position);
 
-        otherRb.AddForce(awayFromMissile *
-            _knockback,
+        otherRb.AddForce(awayFromMissile * _knockback,
             ForceMode.Impulse);
     }
     

@@ -15,6 +15,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 public class Missile : MonoBehaviour
 {
+    public static float YPositionOffset = 0.15f;
+
     private GameObject _missilePrefab;
     private int _missileCount = 3;
 
