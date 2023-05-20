@@ -34,9 +34,11 @@ public class Missile : MonoBehaviour
     /// <inheritdoc />
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _missileCount != 0)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (Input.GetKeyDown(KeyCode.Space) && enemies.Length > 0 && _missileCount != 0)
         {
-            Instantiate(_missilePrefab, transform.position + _missilePrefab.transform.position, _missilePrefab.transform.rotation);
+            Instantiate(_missilePrefab, transform.position + new Vector3(0, YPositionOffset, 0),
+                _missilePrefab.transform.rotation);
             _missileCount--;
         }
     }

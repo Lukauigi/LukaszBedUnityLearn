@@ -22,8 +22,12 @@ using UnityEngine;
 public class MissileProjectile : MonoBehaviour
 {
     [SerializeField, Tooltip("The movement rate of the missile's position."), Range(1f, 15f)]
-    private float _speed = 6f;
+    private float _movementSpeed = 6f;
+    [SerializeField, Tooltip("The rotation rate when the missile rotates."), Range(1f, 15f)]
+    private float _rotationSpeed = 4f;
     private float _knockback;
+    private bool _isSeekingTarget = false;
+    private GameObject _targetEnemy;
 
     /// <inheritdoc />
     private void Start()
@@ -35,34 +39,46 @@ public class MissileProjectile : MonoBehaviour
     /// <inheritdoc />
     void Update()
     {
-        //find all enemies
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        //get delta distance b/w enemies & player
-        float distanceApart;
-        float shortestDistance = Vector3.Distance(transform.position, enemies[0].transform.position);
-        GameObject closestEnemy = enemies[0];
-
-        for (int i = 1; i < enemies.Length; i++)
+        if (!_isSeekingTarget)
         {
-            distanceApart = Vector3.Distance(transform.position, enemies[i].transform.position);
-            if (distanceApart < shortestDistance)
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            if (enemies.Length > 0)
             {
-                shortestDistance = distanceApart;
-                closestEnemy = enemies[i];
+                //get delta distance b/w enemies & player
+                float distanceApart;
+                float shortestDistance = Vector3.Distance(transform.position, 
+                    enemies[0].transform.position);
+                GameObject closestEnemy = enemies[0];
+
+                for (int i = 1; i < enemies.Length; i++)
+                {
+                    distanceApart = Vector3.Distance(transform.position, enemies[i].transform.position);
+                    if (distanceApart < shortestDistance)
+                    {
+                        shortestDistance = distanceApart;
+                        closestEnemy = enemies[i];
+                    }
+                }
+
+                _targetEnemy = closestEnemy;
+                _isSeekingTarget = true;
             }
         }
+        else
+        {
+            //home to nearest enemy
+            float movementStep = _movementSpeed * Time.deltaTime; // calc distance to move
+            Transform homeTarget = _targetEnemy.transform;
+            transform.position = Vector3.MoveTowards(transform.position, homeTarget.position, movementStep);
+            transform.position = new Vector3(transform.position.x, Missile.YPositionOffset, transform.position.z);
 
-        //home to nearest enemy
-        float step = _speed * Time.deltaTime; // calc distance to move
-        Transform homeTarget = closestEnemy.transform;
-        transform.position = Vector3.MoveTowards(transform.position, homeTarget.position, step);
-        transform.position = new Vector3(transform.position.x, Missile.YPositionOffset, transform.position.z);
-
-        //rotate missile towards other object
-        Vector3 homeTargetDirection = homeTarget.position - transform.position;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, homeTargetDirection, step, 0f);
-        transform.rotation = Quaternion.LookRotation(newDirection);
+            //rotate missile towards other object
+            float rotationStep = _rotationSpeed * Time.deltaTime;
+            Vector3 homeTargetDirection = homeTarget.position - transform.position;
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, homeTargetDirection, rotationStep, 0f);
+            transform.rotation = Quaternion.LookRotation(newDirection);
+        }        
     }
 
     /// <inheritdoc />
