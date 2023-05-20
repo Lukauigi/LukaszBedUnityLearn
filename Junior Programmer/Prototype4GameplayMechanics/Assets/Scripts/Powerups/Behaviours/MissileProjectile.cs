@@ -25,8 +25,13 @@ public class MissileProjectile : MonoBehaviour
     private float _movementSpeed = 6f;
     [SerializeField, Tooltip("The rotation rate when the missile rotates."), Range(1f, 15f)]
     private float _rotationSpeed = 4f;
+    [SerializeField, Tooltip("The time before the missile will destroy itself."), Range(1f, 15f)]
+    private float _selfdestructTime = 5f;
+
     private float _knockback;
     private bool _isSeekingTarget = false;
+
+    // Ref(s) to other game objects
     private GameObject _targetEnemy;
 
     /// <inheritdoc />
@@ -67,6 +72,8 @@ public class MissileProjectile : MonoBehaviour
         }
         else
         {
+            StartCoroutine(SelfDestructCountdown());
+
             //home to nearest enemy
             float movementStep = _movementSpeed * Time.deltaTime; // calc distance to move
             Transform homeTarget = _targetEnemy.transform;
@@ -102,6 +109,16 @@ public class MissileProjectile : MonoBehaviour
 
         otherRb.AddForce(awayFromMissile * _knockback,
             ForceMode.Impulse);
+    }
+
+    /// <summary>
+    /// Waits until the missile is set to self-destruct.
+    /// </summary>
+    /// <returns>A second, waiting for self-destruct time.</returns>
+    private IEnumerator SelfDestructCountdown()
+    {
+        yield return new WaitForSeconds(_selfdestructTime);
+        Destroy(gameObject);
     }
     
 }
