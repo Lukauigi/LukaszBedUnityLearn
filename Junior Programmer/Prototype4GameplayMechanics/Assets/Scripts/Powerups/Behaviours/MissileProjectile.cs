@@ -21,6 +21,7 @@ using UnityEngine;
 /// </remarks>
 public class MissileProjectile : MonoBehaviour
 {
+    // Attributes
     [SerializeField, Tooltip("The movement rate of the missile's position."), Range(1f, 15f)]
     private float _movementSpeed = 6f;
     [SerializeField, Tooltip("The rotation rate when the missile rotates."), Range(1f, 15f)]
@@ -46,46 +47,11 @@ public class MissileProjectile : MonoBehaviour
     {
         if (!_isSeekingTarget)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-            if (enemies.Length > 0)
-            {
-                //get delta distance b/w enemies & player
-                float distanceApart;
-                float shortestDistance = Vector3.Distance(transform.position, 
-                    enemies[0].transform.position);
-                GameObject closestEnemy = enemies[0];
-
-                for (int i = 1; i < enemies.Length; i++)
-                {
-                    distanceApart = Vector3.Distance(transform.position, enemies[i].transform.position);
-                    if (distanceApart < shortestDistance)
-                    {
-                        shortestDistance = distanceApart;
-                        closestEnemy = enemies[i];
-                    }
-                }
-
-                _targetEnemy = closestEnemy;
-                _isSeekingTarget = true;
-            }
+            FindTarget();
         }
-        else
-        {
-            StartCoroutine(SelfDestructCountdown());
 
-            //home to nearest enemy
-            float movementStep = _movementSpeed * Time.deltaTime; // calc distance to move
-            Transform homeTarget = _targetEnemy.transform;
-            transform.position = Vector3.MoveTowards(transform.position, homeTarget.position, movementStep);
-            transform.position = new Vector3(transform.position.x, Missile.YPositionOffset, transform.position.z);
-
-            //rotate missile towards other object
-            float rotationStep = _rotationSpeed * Time.deltaTime;
-            Vector3 homeTargetDirection = homeTarget.position - transform.position;
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, homeTargetDirection, rotationStep, 0f);
-            transform.rotation = Quaternion.LookRotation(newDirection);
-        }        
+        StartCoroutine(SelfDestructCountdown());
+        SeekTarget();
     }
 
     /// <inheritdoc />
@@ -96,6 +62,82 @@ public class MissileProjectile : MonoBehaviour
             ApplyKnockback(other.attachedRigidbody);
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// Finds the nearest enemy target in relation to the missile itself.
+    /// </summary>
+    private void FindTarget()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (enemies.Length > 0)
+        {
+            //get delta distance b/w enemies & player
+            float distanceApart;
+            float shortestDistance = Vector3.Distance(transform.position,
+                enemies[0].transform.position);
+            GameObject closestEnemy = enemies[0];
+
+            for (int i = 1; i < enemies.Length; i++)
+            {
+                distanceApart = Vector3.Distance(transform.position, enemies[i].transform.position);
+                if (distanceApart < shortestDistance)
+                {
+                    shortestDistance = distanceApart;
+                    closestEnemy = enemies[i];
+                }
+            }
+
+            _targetEnemy = closestEnemy;
+            _isSeekingTarget = true;
+        }
+    }
+
+    /// <summary>
+    /// Homes toward the closest enemy target.
+    /// </summary>
+    private void SeekTarget()
+    {
+        MoveMissileTowardsTarget();
+        RotateMissileTowardsTarget();
+        if (!_targetEnemy && _isSeekingTarget)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Moves the missile's position towards the enemy target's position.
+    /// </summary>
+    private void MoveMissileTowardsTarget()
+    {
+        float movementStep = _movementSpeed * Time.deltaTime; // calc distance to move
+        if (_targetEnemy)
+        {
+            
+            Transform homeTarget = _targetEnemy.transform;
+            transform.position = Vector3.MoveTowards(transform.position, 
+                homeTarget.position, movementStep);
+            transform.position = new Vector3(transform.position.x, 
+                Missile.YPositionOffset, transform.position.z);
+        }        
+    }
+
+    /// <summary>
+    /// Rotates the missile so that the front of the missile is facing the enemy target.
+    /// </summary>
+    private void RotateMissileTowardsTarget()
+    {
+        float rotationStep = _rotationSpeed * Time.deltaTime;
+        if (_targetEnemy)
+        {
+            Transform homeTarget = _targetEnemy.transform;
+            Vector3 homeTargetDirection = homeTarget.position - transform.position;
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, 
+                homeTargetDirection, rotationStep, 0f);
+            transform.rotation = Quaternion.LookRotation(newDirection);
+        } 
     }
 
     /// <summary>
