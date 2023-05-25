@@ -508,6 +508,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Missile Powerup
       objectReference: {fileID: 0}
+    - target: {fileID: 2746938804534679064, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
 --- !u!1 &1211016355
