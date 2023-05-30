@@ -14,9 +14,15 @@ using UnityEngine;
 /// </remarks>
 public class SpawnManager : MonoBehaviour
 {
-    public static (float, float) RandomRange = (0f, 100f);
+    public static (float, float) RandomRange = (1f, 100f);
+
+    // Enemy spawn chances
     public static float HardEnemySpawnChance = 20f;
-    public static float MissilePowerupSpawnChance = 15f;
+
+    // Powerup spawn chances
+    public static float BouncePowerupSpawnChance = 55f;
+    public static float MissilePowerupSpawnChance = 25f;
+    public static float GroundPoundPowerupSpawnChance = 15f;
 
     // Attribute(s)
     private float _spawnRange = 9f;
@@ -84,20 +90,29 @@ public class SpawnManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawns a powerup on the stage.
+    /// Spawns a random powerup on the stage.
     /// </summary>
     private void SpawnPowerup()
     {
         float powerupChance = Random.Range(RandomRange.Item1, RandomRange.Item2);
-        if (powerupChance <= MissilePowerupSpawnChance)
+
+        if (powerupChance <= BouncePowerupSpawnChance)
+        {
+            Instantiate(_powerupPrefabs[0], GenerateSpawnPosition(),
+                _powerupPrefabs[0].transform.rotation);
+        }
+
+        else if (powerupChance > BouncePowerupSpawnChance && 
+            powerupChance <= BouncePowerupSpawnChance + MissilePowerupSpawnChance)
         {
             Instantiate(_powerupPrefabs[1], GenerateSpawnPosition(), 
                 _powerupPrefabs[1].transform.rotation);
         }
+
         else
         {
-            Instantiate(_powerupPrefabs[0], GenerateSpawnPosition(), 
-                _powerupPrefabs[0].transform.rotation);
+            Instantiate(_powerupPrefabs[2], GenerateSpawnPosition(), 
+                _powerupPrefabs[2].transform.rotation);
         }
     }
 }
