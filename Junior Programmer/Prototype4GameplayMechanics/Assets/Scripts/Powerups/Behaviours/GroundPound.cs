@@ -22,10 +22,16 @@ public class GroundPound : MonoBehaviour
 
     // Instance Attributes
     private bool _isGroundPounding = false;
-    public float _pushForce;
+    private float _pushForce;
 
-    //Ref(s) to attached components
+    // Ref(s) to attached components
     private Rigidbody _playerRb;
+
+    // Public Access Fields
+    /// <summary>
+    /// Indicates whether the ground pound action is being performed.
+    /// </summary>
+    public bool IsGroundPounding { get { return _isGroundPounding; } }
 
     // Start is called before the first frame update
     void Start()
@@ -72,12 +78,12 @@ public class GroundPound : MonoBehaviour
         }
 
         // Push nearby enemies away
-        if (enemies.Length != 0)
+        foreach (GameObject enemy in enemies)
         {
-            foreach (GameObject enemy in enemies)
+            if (!enemy)
             {
                 enemy.GetComponent<Rigidbody>().AddExplosionForce(_pushForce, transform.position,
-                    PushForceRadius, 0f, ForceMode.Impulse);
+                PushForceRadius, 0f, ForceMode.Impulse);
             }
         }
 

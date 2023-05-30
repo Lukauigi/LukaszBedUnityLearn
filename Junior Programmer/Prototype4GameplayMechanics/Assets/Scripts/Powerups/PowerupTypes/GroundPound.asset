@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GroundPound
   m_EditorClassIdentifier: 
   _name: GroundPound
-  _duration: 9
+  _duration: 2
   _knockback: 25

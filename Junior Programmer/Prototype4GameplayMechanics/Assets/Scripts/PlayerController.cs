@@ -79,7 +79,19 @@ public class PlayerController : MonoBehaviour
     private IEnumerator PowerupCountdownRoutine()
     {
         yield return new WaitForSeconds(_currentPowerup.Duration);
-        Destroy(GetComponent(Type.GetType(_currentPowerup.Name)));
+        Component powerup = GetComponent(Type.GetType(_currentPowerup.Name));
+
+        // Wait for the ground pound action to finish before removing the component
+        if (_currentPowerup.Name == "GroundPound")
+        {
+            while (powerup.GetComponent<GroundPound>().IsGroundPounding)
+            {
+                print("still pounding ;)");
+                yield return null;
+            }
+        }
+
+        Destroy(powerup);
         _currentPowerup = null;
         _powerupIndicator.SetActive(false);
     }
