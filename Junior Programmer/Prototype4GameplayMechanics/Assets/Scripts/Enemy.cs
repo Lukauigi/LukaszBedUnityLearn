@@ -19,7 +19,10 @@ public class Enemy : MonoBehaviour
     private float _speed = 2.5f;
     private float _yDestroyThreshold = -10f;
     [SerializeField, Tooltip("Is the enemy a boss enemy.")]
+
+    // For the boss
     private bool _isBoss = false;
+    private float _bossKnockback = 1.25f;
 
     // Ref(s) to attached component(s)
     private Rigidbody _enemyRb;
@@ -46,6 +49,17 @@ public class Enemy : MonoBehaviour
         if (transform.position.y < _yDestroyThreshold)
         {
             Destroy(gameObject);
+        }
+    }
+
+    /// <inheritdoc />
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (_isBoss && collision.gameObject.CompareTag("Player"))
+        {
+            Rigidbody otherRb = collision.gameObject.GetComponent<Rigidbody>();
+            Vector3 oppositeDirection = (otherRb.transform.position - transform.position);
+            otherRb.AddForce(oppositeDirection * _bossKnockback, ForceMode.Impulse);
         }
     }
 }
