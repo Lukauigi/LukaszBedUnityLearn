@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("The movement speed.")]
     private float _speed = 2.5f;
     private float _yDestroyThreshold = -10f;
+    [SerializeField, Tooltip("Is the enemy a boss enemy.")]
+    private bool _isBoss = false;
 
     // Ref(s) to attached component(s)
     private Rigidbody _enemyRb;

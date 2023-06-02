@@ -18,6 +18,7 @@ public class SpawnManager : MonoBehaviour
 
     // Enemy spawn chances
     public static float HardEnemySpawnChance = 20f;
+    public static int BossSpawnInterval = 5;
 
     // Powerup spawn chances
     public static float BouncePowerupSpawnChance = 55f;
