@@ -14,6 +14,8 @@ using UnityEngine;
 /// </remarks>
 public class SpawnManager : MonoBehaviour
 {
+    private const float BossSpawnYPosition = 8f;
+    
     public static (float, float) RandomRange = (1f, 100f);
 
     // Enemy spawn chances
@@ -35,6 +37,7 @@ public class SpawnManager : MonoBehaviour
     private int _enemySpawnCount;
     private int _currentEnemyCount;
     private int _waveCount;
+    private bool _bossWaveSpawned = false;
 
     // Ref(s) to other GameObject(s)
     [SerializeField, Tooltip("A list of prefab game objects representing an enemies.")]
@@ -43,6 +46,9 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] _powerupPrefabs;
     [SerializeField, Tooltip("A reference to the enemy boss prefab.")]
     private GameObject _bossEnemyPrefab;
+
+    // other
+    private Coroutine _bossWaveSpawnCycle;
 
     /// <inheritdoc />
     void Start()
@@ -57,12 +63,19 @@ public class SpawnManager : MonoBehaviour
         _currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (_currentEnemyCount == 0)
         {
+            if (_bossWaveSpawned)
+            {
+                _bossWaveSpawned = false;
+                StopCoroutine(_bossWaveSpawnCycle);
+            }
+            
             _enemySpawnCount = _waveCount;
             _waveCount++;
 
             if (_waveCount % BossSpawnInterval == 1)
             {
                 SpawnBossWave(_enemySpawnCount);
+                _bossWaveSpawned = true;
             }
             else
             {
@@ -107,16 +120,17 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnBossWave(int enemyCount)
     {
-        Instantiate(_bossEnemyPrefab, new Vector3(0f, 8f, 0f), _bossEnemyPrefab.transform.rotation);
+        Instantiate(_bossEnemyPrefab, new Vector3(0f, BossSpawnYPosition, 0f), _bossEnemyPrefab.transform.rotation);
         SpawnEnemyWave(enemyCount);
-        BossWaveSpawnCycle();
+        _bossWaveSpawnCycle = StartCoroutine(BossWaveSpawnCycle());
     }
 
     private IEnumerator BossWaveSpawnCycle()
     {
         float cycle = 0;
 
-        while (_currentEnemyCount != 0)
+        yield return new WaitForSeconds(1);
+        while (_currentEnemyCount > 0)
         {
             switch (cycle)
             {
