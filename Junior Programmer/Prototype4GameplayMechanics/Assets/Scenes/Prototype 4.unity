@@ -896,6 +896,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 1990007046058762765, guid: d77ed78ca7df2874d85532c50823f5b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d77ed78ca7df2874d85532c50823f5b8, type: 3}
 --- !u!1 &1624083103
@@ -934,6 +938,7 @@ MonoBehaviour:
   - {fileID: 5495496338894878345, guid: ad702c1663c66a8438a1e62c3a221676, type: 3}
   - {fileID: 2746938804534679064, guid: 6a8dceae506c7c94981a0f33eb268faa, type: 3}
   - {fileID: 8620174164536221521, guid: e4ff8fb25caf9514eaa3b3d3e4b38fe3, type: 3}
+  _bossEnemyPrefab: {fileID: 1990007046058762765, guid: d77ed78ca7df2874d85532c50823f5b8, type: 3}
 --- !u!4 &1624083105
 Transform:
   m_ObjectHideFlags: 0

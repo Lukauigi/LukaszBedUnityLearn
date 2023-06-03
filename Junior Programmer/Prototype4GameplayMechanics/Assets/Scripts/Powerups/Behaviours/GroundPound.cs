@@ -45,7 +45,6 @@ public class GroundPound : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !_isGroundPounding)
         {
-            print("ground pound");
             StartCoroutine(GroundPoundAction());
         }
     }
@@ -57,10 +56,7 @@ public class GroundPound : MonoBehaviour
     private IEnumerator GroundPoundAction()
     {
         _isGroundPounding = true;
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
         float floorYPosition = transform.position.y;
-
         float jumpTime = Time.time + AirTime;
 
         // Move player up for the duration of its air time
@@ -77,13 +73,14 @@ public class GroundPound : MonoBehaviour
             yield return null;
         }
 
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         // Push nearby enemies away
         foreach (GameObject enemy in enemies)
         {
-            if (!enemy)
+            if (enemy)
             {
                 enemy.GetComponent<Rigidbody>().AddExplosionForce(_pushForce, transform.position,
-                PushForceRadius, 0f, ForceMode.Impulse);
+                    PushForceRadius, 0f, ForceMode.Impulse);
             }
         }
 

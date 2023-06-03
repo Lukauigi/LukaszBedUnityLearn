@@ -25,6 +25,11 @@ public class SpawnManager : MonoBehaviour
     public static float MissilePowerupSpawnChance = 25f;
     public static float GroundPoundPowerupSpawnChance = 15f;
 
+    // Spawn cycle durations (in seconds)
+    public const float BossWaveSpawnCycleMaxSeconds = 10f;
+    public const float EnemySpawnCycleCooldown = 10f;
+    public const float PowerupSpawnCycleCooldown = 6f;
+
     // Attribute(s)
     private float _spawnRange = 9f;
     private int _enemySpawnCount;
@@ -36,11 +41,13 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] _enemyPrefabs;
     [SerializeField, Tooltip("A list of prefab game objects representing a powerup.")]
     private GameObject[] _powerupPrefabs;
+    [SerializeField, Tooltip("A reference to the enemy boss prefab.")]
+    private GameObject _bossEnemyPrefab;
 
     /// <inheritdoc />
     void Start()
     {
-        _waveCount = 0;
+        _waveCount = 1;
         _enemySpawnCount = 0;
     }
 
@@ -50,10 +57,18 @@ public class SpawnManager : MonoBehaviour
         _currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (_currentEnemyCount == 0)
         {
-            SpawnPowerup();
-            ++_waveCount;
             _enemySpawnCount = _waveCount;
-            SpawnEnemyWave(_enemySpawnCount);
+            _waveCount++;
+
+            if (_waveCount % BossSpawnInterval == 1)
+            {
+                SpawnBossWave(_enemySpawnCount);
+            }
+            else
+            {
+                SpawnPowerup();
+                SpawnEnemyWave(_enemySpawnCount);
+            }
         }
     }
 
@@ -87,6 +102,37 @@ public class SpawnManager : MonoBehaviour
             {
                 Instantiate(_enemyPrefabs[0], GenerateSpawnPosition(), _enemyPrefabs[0].transform.rotation);
             }
+        }
+    }
+
+    private void SpawnBossWave(int enemyCount)
+    {
+        Instantiate(_bossEnemyPrefab, new Vector3(0f, 8f, 0f), _bossEnemyPrefab.transform.rotation);
+        SpawnEnemyWave(enemyCount);
+        BossWaveSpawnCycle();
+    }
+
+    private IEnumerator BossWaveSpawnCycle()
+    {
+        float cycle = 0;
+
+        while (_currentEnemyCount != 0)
+        {
+            switch (cycle)
+            {
+                case PowerupSpawnCycleCooldown:
+                    SpawnPowerup();
+                    break;
+
+                case EnemySpawnCycleCooldown:
+                    SpawnEnemyWave(1);
+                    break;
+            }
+
+            if (cycle != BossWaveSpawnCycleMaxSeconds) ++cycle;
+            else cycle = 0;
+
+            yield return new WaitForSeconds(1);
         }
     }
 
