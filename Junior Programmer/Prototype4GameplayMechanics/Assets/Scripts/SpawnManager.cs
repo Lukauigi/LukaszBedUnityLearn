@@ -118,6 +118,10 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns the coponents of the boss wave.
+    /// </summary>
+    /// <param name="enemyCount">A positive non-zero integer count of enemies to spawn.</param>
     private void SpawnBossWave(int enemyCount)
     {
         Instantiate(_bossEnemyPrefab, new Vector3(0f, BossSpawnYPosition, 0f), _bossEnemyPrefab.transform.rotation);
@@ -125,6 +129,10 @@ public class SpawnManager : MonoBehaviour
         _bossWaveSpawnCycle = StartCoroutine(BossWaveSpawnCycle());
     }
 
+    /// <summary>
+    /// Runs a cycle of spawning powerups and enemies during the boss wave.
+    /// </summary>
+    /// <returns>A second.</returns>
     private IEnumerator BossWaveSpawnCycle()
     {
         float cycle = 0;
