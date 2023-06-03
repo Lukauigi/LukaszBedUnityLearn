@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
     // Attributes
     [SerializeField, Tooltip("The movement speed.")]
     private float _speed = 2.5f;
-    private float _yDestroyThreshold = -10f;
     [SerializeField, Tooltip("Is the enemy a boss enemy.")]
 
     // For the boss
@@ -30,14 +29,14 @@ public class Enemy : MonoBehaviour
     // Ref(s) to other GameObject(s)
     private GameObject _player;
 
-    // Start is called before the first frame update
+    /// <inheritdoc />
     void Start()
     {
         _enemyRb = GetComponent<Rigidbody>();
         _player = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
+    /// <inheritdoc />
     void Update()
     {
         // normalized to not have the movement over greater distances faster
@@ -45,11 +44,6 @@ public class Enemy : MonoBehaviour
         lookDirection.y = 0f;
 
         _enemyRb.AddForce(lookDirection * _speed);
-
-        if (transform.position.y < _yDestroyThreshold)
-        {
-            Destroy(gameObject);
-        }
     }
 
     /// <inheritdoc />
