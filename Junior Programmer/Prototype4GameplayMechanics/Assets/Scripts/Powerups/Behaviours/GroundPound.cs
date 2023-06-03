@@ -16,8 +16,8 @@ using UnityEngine;
 public class GroundPound : MonoBehaviour
 {
     // Static Attributes
-    public static float AirTime = 1f;
-    public static float VerticalMoveSpeed = 20f;
+    public static float AirTime = 0.7f;
+    public static float VerticalMoveSpeed = 13f;
     public static float PushForceRadius = 20f;
 
     // Instance Attributes
@@ -56,20 +56,21 @@ public class GroundPound : MonoBehaviour
     private IEnumerator GroundPoundAction()
     {
         _isGroundPounding = true;
+        _playerRb.velocity = new Vector3(0f, 0f, 0f);
         float floorYPosition = transform.position.y;
         float jumpTime = Time.time + AirTime;
 
         // Move player up for the duration of its air time
         while(Time.time < jumpTime)
         {
-            _playerRb.velocity = new Vector2(_playerRb.velocity.x, VerticalMoveSpeed);
+            _playerRb.velocity = new Vector3(0f, VerticalMoveSpeed, 0f);
             yield return null;
         }
 
         // Move player down until they hit the floor
         while(transform.position.y > floorYPosition)
         {
-            _playerRb.velocity = new Vector2(_playerRb.velocity.x, -VerticalMoveSpeed * 2);
+            _playerRb.velocity = new Vector3(0f, -VerticalMoveSpeed * 2, 0f);
             yield return null;
         }
 
