@@ -495,9 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f5ae76f03ab7545b98b6c05b58da07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _speed: 5
   _lives: 1
-  _yPositionThreshold: -10
   _powerupIndicator: {fileID: 218573304}
 --- !u!1001 &673629035
 PrefabInstance:
