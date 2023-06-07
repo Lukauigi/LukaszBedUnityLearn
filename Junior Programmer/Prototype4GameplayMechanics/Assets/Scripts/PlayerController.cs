@@ -25,9 +25,6 @@ public class PlayerController : MonoBehaviour
     private PowerupScriptableObject _currentPowerup;
     // https://answers.unity.com/questions/1029332/restart-a-coroutine.html
     private Coroutine _powerupActiveCoroutine = null;
-    [SerializeField, Tooltip("The Y coordinate which prompts object destruction."),
-        Range(-10f, -50f)]
-    private float _yPositionThreshold = -10f;
 
     // Ref(s) to attached component(s)
     private Rigidbody _playerRb;
