@@ -12,9 +12,11 @@ using UnityEngine;
 /// </para>
 public class DestroyOOB : MonoBehaviour
 {
+    public static float DefaultYPositionDestroyThreshold = -10f;
+
     [SerializeField, Tooltip("The Y coordinate which prompts object destruction."),
         Range(-10f, -50f)]
-    private float _yPositionThreshold = -10f;
+    private float _yPositionThreshold = DefaultYPositionDestroyThreshold;
 
     /// <inheritdoc />
     void Start()

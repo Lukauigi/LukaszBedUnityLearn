@@ -20,9 +20,14 @@ public class PlayerController : MonoBehaviour
     // Attributes
     [SerializeField, Tooltip("The movement speed of the player.")]
     private float _speed = 5f;
+    [SerializeField, Tooltip("The amount of respawns the player has."), Range(1, 9)]
+    private int _lives = 1;
     private PowerupScriptableObject _currentPowerup;
     // https://answers.unity.com/questions/1029332/restart-a-coroutine.html
     private Coroutine _powerupActiveCoroutine = null;
+    [SerializeField, Tooltip("The Y coordinate which prompts object destruction."),
+        Range(-10f, -50f)]
+    private float _yPositionThreshold = -10f;
 
     // Ref(s) to attached component(s)
     private Rigidbody _playerRb;
@@ -34,15 +39,16 @@ public class PlayerController : MonoBehaviour
 
     // Field(s)
     public PowerupScriptableObject CurrentPowerup { get { return _currentPowerup; } }
+    public int Lives { get { return _lives; } }
 
-    // Start is called before the first frame update
+    /// <inheritdoc />
     void Start()
     {
         _playerRb = GetComponent<Rigidbody>();
         _focalPoint = GameObject.Find("Focal Point");
     }
 
-    // Update is called once per frame
+    /// <inheritdoc />
     void Update()
     {
         float forwardInput = Input.GetAxis("Vertical");
@@ -94,5 +100,24 @@ public class PlayerController : MonoBehaviour
         Destroy(powerup);
         _currentPowerup = null;
         _powerupIndicator.SetActive(false);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void Death()
+    {
+        DecrementLife();
+    }
+
+    /// <summary>
+    /// Decrements the life count of the player.
+    /// </summary>
+    public void DecrementLife()
+    {
+        if (_lives >= 0)
+        {
+            --_lives;
+        }
     }
 }

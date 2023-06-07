@@ -46,13 +46,22 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] _powerupPrefabs;
     [SerializeField, Tooltip("A reference to the enemy boss prefab.")]
     private GameObject _bossEnemyPrefab;
+    private GameObject _player;
+    private GameManager _gameManager;
 
-    // other
+    // Ref(s) to other components
+    private PlayerController _playerController;
+
+    // Coroutines
     private Coroutine _bossWaveSpawnCycle;
 
     /// <inheritdoc />
     void Start()
     {
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playerController = _player.GetComponent<PlayerController>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
         _waveCount = 1;
         _enemySpawnCount = 0;
     }
@@ -60,6 +69,7 @@ public class SpawnManager : MonoBehaviour
     /// <inheritdoc />
     private void Update()
     {
+        CheckPlayerDeath();
         _currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (_currentEnemyCount == 0)
         {
@@ -183,5 +193,51 @@ public class SpawnManager : MonoBehaviour
             Instantiate(_powerupPrefabs[2], GenerateSpawnPosition(), 
                 _powerupPrefabs[2].transform.rotation);
         }
+    }
+
+    /// <summary>
+    /// Checks if the player has died, and executes logic if it is.
+    /// </summary>
+    private void CheckPlayerDeath()
+    {
+        if (_playerController.transform.position.y < DestroyOOB.DefaultYPositionDestroyThreshold)
+        {
+            PlayerDeath();
+        }
+    }
+
+    /// <summary>
+    /// Respawns the player or calls for a game over scenario.
+    /// </summary>
+    private void PlayerDeath()
+    {
+        _playerController.DecrementLife();
+        _playerController.gameObject.SetActive(false);
+
+        if (_playerController.Lives == 0)
+        {
+            _gameManager.GameOver();
+        }
+        else
+        {
+            RespawnPlayer();
+        }
+    }
+
+    /// <summary>
+    /// Respawns the player onto the stage.
+    /// </summary>
+    private void RespawnPlayer()
+    {
+        // Disable player GO for some time
+        // flip player respawning var
+        // add if to enemy script to check if player is respawning or followable
+        // Move player transform to center of stage
+        // call player respawn method (IEnum of invincibility. Flip respawning var.)
+    }
+
+    private IEnumerator PlayerDeathPause()
+    {
+        yield return null;
     }
 }
