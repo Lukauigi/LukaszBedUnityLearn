@@ -38,7 +38,13 @@ public class PlayerController : MonoBehaviour
     private GameObject _powerupIndicator;
 
     // Field(s)
+    /// <summary>
+    /// Returns the current powerup the player has.
+    /// </summary>
     public PowerupScriptableObject CurrentPowerup { get { return _currentPowerup; } }
+    /// <summary>
+    /// Returns the count of player lives.
+    /// </summary>
     public int Lives { get { return _lives; } }
 
     /// <inheritdoc />
