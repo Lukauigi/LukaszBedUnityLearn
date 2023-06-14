@@ -209,3 +209,10 @@ Learn about fundamental programming concepts such as variables, functions and ba
    * Tie player input into focal point's local forward direction
 * Normalizing values
    * Normalize the distance b/w enemy & player to have enemy move at a constant speed (speed does not flucuate based on distance) 
+
+##### Unit 5: User Interface
+* Add torque (rotate) to a Game Object
+* Toggle 2D view
+* Mouse Events
+   * Can be overidden from Monobehaviour class
+   * Such events include: https://docs.unity3d.com/Manual/UIE-Mouse-Events.html
