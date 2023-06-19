@@ -226,3 +226,6 @@ Learn about fundamental programming concepts such as variables, functions and ba
 * Basic methods of game over & game restart
    * Use `UnityEngine.UI` for Button class
    * Use `UnityEngine.SceneManagement` for scene manager loading (used for restart)
+* Using `AddListener()` via scripting for a button
+   * i.e.: `button.onClick.AddListener(methodName);`
+* Group child UI elements in a parent for easy disabling and enabling
