@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
     public Button _restartButton;
+    public GameObject _titleScreen;
 
     // Attribtes
     [SerializeField, Tooltip("A list of targets.")]
@@ -56,9 +57,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    /// <inheritdoc />
-    void Start()
+
+    public void StartGame()
     {
+        _titleScreen.gameObject.SetActive(false);
         _isGameActive = true;
         StartCoroutine(SpawnTarget());
         _score = 0;
@@ -66,7 +68,13 @@ public class GameManager : MonoBehaviour
     }
 
     /// <inheritdoc />
-    void Update()
+    private void Start()
+    {
+        
+    }
+
+    /// <inheritdoc />
+    private void Update()
     {
         
     }
