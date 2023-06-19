@@ -14,6 +14,8 @@ public class Target : MonoBehaviour
     [SerializeField, Tooltip("The point value of this target that will apply to the score when clicked."), 
         Range(-50, 50)]
     private int _pointValue = 5;
+    [SerializeField, Tooltip("Explosion particle effect triggered on click.")]
+    private ParticleSystem _onExplosion;
     private float _minSpeed = 12;
     private float _maxSpeed = 16;
     private float _minTorque = -10;
@@ -47,6 +49,7 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
+        Instantiate(_onExplosion, transform.position, _onExplosion.transform.rotation);
         _gameManager.UpdateScore(_pointValue);
     }
 
