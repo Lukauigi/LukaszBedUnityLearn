@@ -2,14 +2,28 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// 
+/// A button UI element of a difficulty of the gameplay.
 /// </summary>
 public class DifficultyButton : MonoBehaviour
 {
+    [SerializeField, 
+        Tooltip("A whole number representing the difficulty of the game when this button is selected."),
+        Range(1, 3)]
+    private int _difficulty;
+
     private Button _button;
     private GameManager _gameManager;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// A whole number representing the gameplay difficulty. 
+    /// 
+    /// <para>
+    /// 1 = Easy, 2 = Normal, 3 = Hard.
+    /// </para>
+    /// </summary>
+    public int Difficulty { get { return _difficulty; } }
+
+    /// <inheritdoc />
     void Start()
     {
         _button = GetComponent<Button>();
@@ -18,18 +32,11 @@ public class DifficultyButton : MonoBehaviour
         _button.onClick.AddListener(SetDifficulty);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /// <summary>
-    /// 
+    /// Starts the gameplay with the button's set difficulty.
     /// </summary>
-    void SetDifficulty()
+    private void SetDifficulty()
     {
-        print(gameObject.name + " was clicked.");
-        _gameManager.StartGame();
+        _gameManager.StartGame(_difficulty);
     }
 }
