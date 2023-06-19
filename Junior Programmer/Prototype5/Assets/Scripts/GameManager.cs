@@ -21,12 +21,22 @@ public class GameManager : MonoBehaviour
     private float _spawnRate = 1f;
     private int _score;
 
+    /// <summary>
+    /// Updates the score, which is then reflected upon the score UI.
+    /// </summary>
+    /// <param name="additionalScore">A positive integer number to add to the score.</param>
+    public void UpdateScore(int additionalScore)
+    {
+        _score += additionalScore;
+        scoreText.text = "Score: " + _score;
+    }
+
     /// <inheritdoc />
     void Start()
     {
         StartCoroutine(SpawnTarget());
         _score = 0;
-        scoreText.text = "Score: " + _score;
+        UpdateScore(0);
     }
 
     /// <inheritdoc />

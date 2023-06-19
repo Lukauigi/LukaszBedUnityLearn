@@ -11,6 +11,9 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     // Attributes
+    [SerializeField, Tooltip("The point value of this target that will apply to the score when clicked."), 
+        Range(-50, 50)]
+    private int _pointValue = 5;
     private float _minSpeed = 12;
     private float _maxSpeed = 16;
     private float _minTorque = -10;
@@ -20,10 +23,12 @@ public class Target : MonoBehaviour
 
     // Ref(s) to GO components
     private Rigidbody _targetRb;
+    private GameManager _gameManager;
 
     /// <inheritdoc />
     void Start()
     {
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         _targetRb = GetComponent<Rigidbody>();
 
         _targetRb.AddForce(RandomForce(), ForceMode.Impulse);
@@ -42,6 +47,7 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
+        _gameManager.UpdateScore(_pointValue);
     }
 
     /// <inheritdoc />
