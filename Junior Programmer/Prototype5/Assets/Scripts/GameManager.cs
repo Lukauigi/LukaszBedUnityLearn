@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Controller of general game flow.
@@ -13,8 +15,10 @@ using TMPro;
 /// </remarks>
 public class GameManager : MonoBehaviour
 {
+    // Game UI
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
+    public Button _restartButton;
 
     // Attribtes
     [SerializeField, Tooltip("A list of targets.")]
@@ -41,9 +45,17 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         _isGameActive = false;
+        _restartButton.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Restarts the game by starting the same scene at the beginning.
+    /// </summary>
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     /// <inheritdoc />
     void Start()
     {
