@@ -16,7 +16,7 @@ public class Target : MonoBehaviour
     private float _minTorque = -10;
     private float _maxTorque = 10;
     private float _xRange = 4;
-    private float _ySpawnPos = -6;
+    private float _ySpawnPos = -2;
 
     // Ref(s) to GO components
     private Rigidbody _targetRb;
@@ -36,6 +36,18 @@ public class Target : MonoBehaviour
     void Update()
     {
         
+    }
+
+    /// <inheritdoc />
+    private void OnMouseDown()
+    {
+        Destroy(gameObject);
+    }
+
+    /// <inheritdoc />
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 
     /// <summary>
