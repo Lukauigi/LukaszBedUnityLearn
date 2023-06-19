@@ -216,7 +216,13 @@ Learn about fundamental programming concepts such as variables, functions and ba
 * Mouse Events
    * Can be overidden from Monobehaviour class
    * Such events include: https://docs.unity3d.com/Manual/UIE-Mouse-Events.html
-* Basic of text GUI (TextMeshPro)
+* Basics of text GUI (TextMeshPro)
    * Anchoring text to a screen location
    * Changing font properties in-editor & via script
       * Have `using TMPro` and use `TextMeshProUGUI` class
+* Basics of button GUI (Button - TextMeshPro)
+   * Add OnClick events from another game object
+   * Change button & text properties
+* Basic methods of game over & game restart
+   * Use `UnityEngine.UI` for Button class
+   * Use `UnityEngine.SceneManagement` for scene manager loading (used for restart)
