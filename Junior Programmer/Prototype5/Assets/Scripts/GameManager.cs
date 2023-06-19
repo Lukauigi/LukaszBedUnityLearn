@@ -14,12 +14,16 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI gameOverText;
 
     // Attribtes
     [SerializeField, Tooltip("A list of targets.")]
     private List<GameObject> _targets;
     private float _spawnRate = 1f;
     private int _score;
+    private bool _isGameActive;
+
+    public bool IsGameActive { get { return _isGameActive; } }
 
     /// <summary>
     /// Updates the score, which is then reflected upon the score UI.
@@ -31,9 +35,19 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + _score;
     }
 
+    /// <summary>
+    /// Commands a game over state.
+    /// </summary>
+    public void GameOver()
+    {
+        _isGameActive = false;
+        gameOverText.gameObject.SetActive(true);
+    }
+
     /// <inheritdoc />
     void Start()
     {
+        _isGameActive = true;
         StartCoroutine(SpawnTarget());
         _score = 0;
         UpdateScore(0);
@@ -51,7 +65,7 @@ public class GameManager : MonoBehaviour
     /// <returns>The next second until the spawn rate time is depleted.</returns>
     private IEnumerator SpawnTarget()
     {
-        while (true)
+        while (_isGameActive)
         {
             yield return new WaitForSeconds(_spawnRate);
             int index = Random.Range(0, _targets.Count);
