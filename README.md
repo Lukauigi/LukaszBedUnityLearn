@@ -216,3 +216,7 @@ Learn about fundamental programming concepts such as variables, functions and ba
 * Mouse Events
    * Can be overidden from Monobehaviour class
    * Such events include: https://docs.unity3d.com/Manual/UIE-Mouse-Events.html
+* Basic of text GUI (TextMeshPro)
+   * Anchoring text to a screen location
+   * Changing font properties in-editor & via script
+      * Have `using TMPro` and use `TextMeshProUGUI` class
