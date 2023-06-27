@@ -9,6 +9,7 @@ public class GameManagerX : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI timeText;
     public GameObject titleScreen;
     public Button restartButton; 
 
@@ -17,6 +18,8 @@ public class GameManagerX : MonoBehaviour
     private int score;
     private float spawnRate = 1.5f;
     public bool isGameActive;
+    private float timeRemaining = 60f;
+    private bool timerIsRunning = false;
 
     private float spaceBetweenSquares = 2.5f; 
     private float minValueX = -3.75f; //  x value of the center of the left-most square
@@ -31,6 +34,7 @@ public class GameManagerX : MonoBehaviour
         score = 0;
         UpdateScore(0);
         titleScreen.SetActive(false);
+        timerIsRunning = true;
     }
 
     // While game is active spawn a random target
@@ -76,6 +80,7 @@ public class GameManagerX : MonoBehaviour
     // Stop game, bring up game over text and restart button
     public void GameOver()
     {
+        timerIsRunning = false;
         gameOverText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
         isGameActive = false;
@@ -85,6 +90,53 @@ public class GameManagerX : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <inheritdoc />
+    private void Update()
+    {
+        Timer();
+    }
+
+    /// <summary>
+    /// Keeps track of time remaining until that time reaches 0.
+    /// </summary>
+    /// 
+    /// <remarks>
+    /// <para>https://gamedevbeginner.com/how-to-make-countdown-timer-in-unity-minutes-seconds/</para>
+    /// <para>https://dzone.com/articles/c-string-format-examples</para>
+    /// </remarks>
+    private void Timer()
+    {
+        if (timerIsRunning)
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                DisplayTime();
+            }
+            else
+            {
+                timerIsRunning = false;
+                timeRemaining = 0;
+                DisplayTime();
+                GameOver();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Displays the time remaining on the timer GUI.
+    /// </summary>
+    /// 
+    /// <remarks>
+    /// <para>https://gamedevbeginner.com/how-to-make-countdown-timer-in-unity-minutes-seconds/</para>
+    /// <para>https://dzone.com/articles/c-string-format-examples</para>
+    /// </remarks>
+    private void DisplayTime()
+    {
+        float time = Mathf.FloorToInt(timeRemaining % 60);
+        timeText.text = string.Format("Time: {0:00}", time);
     }
 
 }
