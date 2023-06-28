@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     // Game UI
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI livesText;
     public Button _restartButton;
     public GameObject _titleScreen;
 
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
     private float _spawnRate = 1f;
     private int _score;
     private bool _isGameActive;
+
+    // Ref(s) to plain c# objects
+    private Player _player;
 
     public bool IsGameActive { get { return _isGameActive; } }
 
@@ -38,6 +42,20 @@ public class GameManager : MonoBehaviour
     {
         _score += additionalScore;
         scoreText.text = "Score: " + _score;
+    }
+
+    /// <summary>
+    /// Decrements a player life and represents the change on the UI.
+    /// </summary>
+    public void LoseLife()
+    {
+        _player.LoseLife();
+        UpdateLivesUI();
+        if (_player.Lives <= 0)
+        {
+            GameOver();
+        }
+        
     }
 
     /// <summary>
@@ -73,18 +91,12 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(SpawnTarget());
         UpdateScore(0);
+        UpdateLivesUI();
     }
 
-    /// <inheritdoc />
-    private void Start()
+    private void Awake()
     {
-        
-    }
-
-    /// <inheritdoc />
-    private void Update()
-    {
-        
+        _player = new Player();
     }
 
     /// <summary>
@@ -99,5 +111,13 @@ public class GameManager : MonoBehaviour
             int index = Random.Range(0, _targets.Count);
             Instantiate(_targets[index]);
         }
+    }
+
+    /// <summary>
+    /// Updates the lives display UI.
+    /// </summary>
+    private void UpdateLivesUI()
+    {
+        livesText.text = "Lives: " + _player.Lives;
     }
 }
